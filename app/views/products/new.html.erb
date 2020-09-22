@@ -1,0 +1,6 @@
+<h1>Products#new</h1>
+<%= form_with model: @product, url: products_path, method: :post, local: true do |f| %>
+  部品名：<%= f.text_field :name , placeholder:"例）CTR PLR"%>
+<%= f.submit "新規作成する" %>
+<%=link_to 'もどる', issues_path %>
+<% end %>
