@@ -5,3 +5,5 @@
   パスワード<%= f.password_field :password, placeholder:"" %>
   <%= f.submit "ログイン" ,class:"login-red-btn" %>
 <%end%>
+ 登録がまだの方は<%=link_to 'こちら', new_user_registration_path %>から新規登録ができます。
+
