@@ -1,0 +1,7 @@
+<%= @user.nickname %>のスケジュール
+<br>
+<% @products.each do |product| %>
+  ■<%= product.name %> <br>
+<%end%>
+<%= link_to '登録者一覧に戻る', users_path %>
+<%= link_to 'マイページに戻る', issues_path %>
