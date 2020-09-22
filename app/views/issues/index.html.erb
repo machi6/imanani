@@ -1,2 +1,8 @@
 <h1>Issues#index</h1>
+<% if user_signed_in? %>
+　　<%= current_user.nickname %>のトップページ
+<% end %>
 <p>Find me in app/views/issues/index.html.erb</p>
+<% if user_signed_in? %>
+  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout"  %>
+<% end %>
