@@ -1,0 +1,10 @@
+<h1>imanani</h1>
+<h2>課題潰し込みスケジュールツール</h2>
+<%= form_with model: @user, url: user_session_path, class: 'registration-main', local: true do |f| %>
+  email<%= f.email_field :email, placeholder:"xxxx@xxxx", autofocus: true %>
+  <br>
+  パスワード<%= f.password_field :password, placeholder:"" %>
+  <%= f.submit "ログイン" ,class:"login-red-btn" %>
+<%end%>
+ 登録がまだの方は<%=link_to 'こちら', new_user_registration_path %>から新規登録ができます。
+
