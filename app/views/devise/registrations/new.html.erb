@@ -1,0 +1,11 @@
+<h1>ユーザー新規登録</h1>
+<%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+  名前：
+  <div>
+  <%= f.text_area :nickname, placeholder:"例) 山田太郎", maxlength:"40" %>
+  </div>
+  <br>
+  email:
+  <%= f.email_field :email, placeholder:"例)xxxx@xxxx", autofocus: true %>
+  <%= f.submit "新規登録" %>
+<%end%>
