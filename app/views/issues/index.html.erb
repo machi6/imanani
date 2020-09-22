@@ -1,8 +1,20 @@
-<h1>Issues#index</h1>
 <% if user_signed_in? %>
 　　<%= current_user.nickname %>のトップページ
 <% end %>
-<p>Find me in app/views/issues/index.html.erb</p>
+
+<h1>Issues#index</h1>
+<%= link_to '担当部品を新規登録', new_product_path%>
+<br>
+
+<% @products.each do |product| %>
+  ■<%= product.name %>  <%= link_to '課題を新規登録する', new_product_issue_path(product.id) %><br>
+<%end%>
+
+
+
+
+
+<br>
 <% if user_signed_in? %>
   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout"  %>
 <% end %>
