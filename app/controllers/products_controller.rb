@@ -11,6 +11,17 @@ class ProductsController < ApplicationController
       redirect_to new_product_path
     end
   end
+  def edit
+    @product = Product.find(params[:id])
+  end
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to issues_path
+    else
+      render :edit
+    end
+  end
 
   private
   def product_params
