@@ -1,0 +1,6 @@
+<h1>Issue#edit</h1>
+<%= form_with model: @issue, url: product_issue_path(@product.id, @issue.id) , method: :patch, local: true do |f| %>
+  課題を簡潔に入力してください：<%= f.text_field :summary, value:@issue.summary %>
+<%= f.submit "更新する" %>
+<%=link_to 'もどる', issues_path %>
+<% end %>
