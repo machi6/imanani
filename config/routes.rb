@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "issues#index"
   resources :issues, only:[:index]
   resources :users, only:[:index, :show]
-  resources :products, only:[:new, :create] do
+  resources :products, only:[:new, :create, :edit] do
     resources :issues, only:[:new, :create] do
       resources :tasks, only:[:new, :create] do
       end
