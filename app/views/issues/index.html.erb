@@ -1,3 +1,4 @@
+<%# <% require "date" %>
 <% if user_signed_in? %>
 　　<h2><%= current_user.nickname %>のトップページ</h2>
 <% end %>
@@ -29,10 +30,6 @@
     <% end %>
   <%end%>
 <%end%>
-
-
-
-
 
 <br>
 <% if user_signed_in? %>
