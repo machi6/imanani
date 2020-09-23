@@ -1,6 +1,7 @@
 class IssuesController < ApplicationController
   def index
     @products = Product.where(user_id: current_user.id)
+    @issues = Issue.all
   end
   def new
     @issue = Issue.new
