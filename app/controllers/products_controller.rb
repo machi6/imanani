@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to issues_path
     else
+      @product = Product.find(params[:id])
       render :edit
     end
   end
