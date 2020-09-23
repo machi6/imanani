@@ -2,6 +2,8 @@ class IssuesController < ApplicationController
   def index
     @products = Product.where(user_id: current_user.id)
     @issues = Issue.all
+    todays_date = Date.today
+    @tasks = Task.where(start: (todays_date - todays_date.wday)..(todays_date - todays_date.wday + 7)).order(start: "ASC")
   end
   def new
     @issue = Issue.new
