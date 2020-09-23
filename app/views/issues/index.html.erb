@@ -1,3 +1,4 @@
+<%# <% require "date" %>
 <% if user_signed_in? %>
 　　<h2><%= current_user.nickname %>のトップページ</h2>
 <% end %>
@@ -6,17 +7,29 @@
 <h1>Issues#index</h1>
 <%= link_to '担当部品を新規登録', new_product_path%>
 <br>
-
+<% count_for_id = 0 %>
 <% @products.each do |product| %>
   ■<%= product.name %>  <%= link_to '課題を新規登録する', new_product_issue_path(product.id) %><br>
   <% @issues.where(product_id: product.id).each do |issue| %>
-  ---<%= issue.summary %> <%= link_to 'やる事を新規登録する' %> <br>
+  ---<%= issue.summary %> <%= link_to 'やる事を新規登録する', new_product_issue_task_path(product.id, issue.id) %> <br>
+    <% @tasks.where(issue_id: issue.id).each do |task|%>
+      <div class = task_character id = <%= "task_character_#{count_for_id}" %>>
+      <%= task.title %><br>
+      .開始時間：<%= l task.start %> -> 
+      工数：<%= l task.time, format: :short%> -> 
+      終了時間：<%= l task.start + (task.time.hour * 3600) + (task.time.min * 60) %>
+      曜日：<%= task.start.wday %>
+      </div>
+      <div class ="task_wrapper" id = <%= "task_wrapper_#{count_for_id}" %>>
+        <div class = "task_start" value = <%= l task.start, format: :time_only %>></div>
+        <div class = "task_time" value = <%= (task.time.hour * 3600) + (task.time.min * 60) %>></div>
+        <div class = "task_wday" value = <%= task.start.wday %>></div>
+      </div>
+    <br>
+    <% count_for_id += 1 %>
+    <% end %>
   <%end%>
 <%end%>
-
-
-
-
 
 <br>
 <% if user_signed_in? %>

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :issues, only:[:index]
   resources :users, only:[:index, :show]
   resources :products, only:[:new, :create] do
-    resources :issues, only:[:new, :create]
+    resources :issues, only:[:new, :create] do
+      resources :tasks, only:[:new, :create] do
+      end
+    end
   end
 end
