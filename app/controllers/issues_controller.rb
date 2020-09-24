@@ -18,6 +18,20 @@ class IssuesController < ApplicationController
     redirect_to new_product_issue_path(params[:product_id])
     end
   end
+  def edit
+    @product = Product.find(params[:product_id])
+    @issue = Issue.find(params[:id])
+  end
+  def update
+    @issue = Issue.find(params[:id])
+    if @issue.update(issue_params)
+      redirect_to issues_path
+    else
+      @product = Product.find(params[:product_id])
+      @issue = Issue.find(params[:id])
+      render :edit
+    end
+  end
 
   private
   def issue_params

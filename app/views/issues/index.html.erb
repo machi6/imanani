@@ -11,7 +11,7 @@
 <% @products.each do |product| %>
   ■<%= product.name %>：<%= link_to '編集', edit_product_path(product.id) %>：<%= link_to '課題を新規登録する', new_product_issue_path(product.id) %><br>
   <% @issues.where(product_id: product.id).each do |issue| %>
-  ---<%= issue.summary %> <%= link_to 'やる事を新規登録する', new_product_issue_task_path(product.id, issue.id) %> <br>
+  ---<%= issue.summary %>：<%= link_to '編集', edit_product_issue_path(product.id, issue.id) %>：<%= link_to 'やる事を新規登録する', new_product_issue_task_path(product.id, issue.id) %> <br>
     <% @tasks.where(issue_id: issue.id).each do |task|%>
       <div class = task_character id = <%= "task_character_#{count_for_id}" %>>
       <%= task.title %><br>
