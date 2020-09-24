@@ -1,18 +1,35 @@
+.product_wrapper{
+  padding:5px;
+  margin: 5px;
+}
+
 .issue_wrapper{
-  /* display:flex; */
+  padding:5px;
+  margin: 5px;
+  display:flex;
   /* flex-direction: row; */
   /* justify-content: start; */
 }
 
 .issue_title{
+  padding:5px;
+  margin: 5px;
+  min-width: 300px;
   display: block;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   /* width: 500px; */
   /* min-width: 300px; */
   /* position: fixed; */
 }
 
 .task_wrapper{
+  padding:5px;
+  margin: 5px;
+}
+
+.task_block{
+  padding:5px;
+  margin: 5px;
 }
 
 .task_bar{
