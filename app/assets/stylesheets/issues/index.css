@@ -1,5 +1,21 @@
+.issue_wrapper{
+  /* display:flex; */
+  /* flex-direction: row; */
+  /* justify-content: start; */
+}
+
+.issue_title{
+  display: block;
+  white-space: nowrap;
+  /* width: 500px; */
+  /* min-width: 300px; */
+  /* position: fixed; */
+}
+
 .task_wrapper{
-  background-color: lightblue;
+}
+
+.task_bar{
   height: 10px;
 }
 
