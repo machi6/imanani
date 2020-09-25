@@ -27,11 +27,9 @@ class TasksController < ApplicationController
       
       #新しいタスクが割り込みだったらそれ以降のタスクをシフトする
       new_task_end = @task.start + @task.time.min * 60 + @task.time.hour * 3600
-      new_task_man_hours = @task.time.min * 60 + @task.time.hour * 3600
-      
+      # new_task_man_hours = @task.time.min * 60 + @task.time.hour * 3600
       difference = 0.0
       changed = false
-
       ordered_tasks.each do |task|
         if changed == false
           if @task.start < task.start && task.start < new_task_end
@@ -44,7 +42,7 @@ class TasksController < ApplicationController
           task.update(start: task.start + difference)
         end
       end
-      
+
       @task.save
       redirect_to issues_path
     else
@@ -60,10 +58,22 @@ class TasksController < ApplicationController
   end
 
   def update
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      redirect_to issues_path
+    else
+      @product = Product.find(params[:product_id])
+      @issue = Issue.find(params[:issue_id])
+      @task = Task.find(params[:id])
+      render :edit
+    end
   end
 
   private
   def task_params
     params.require(:task).permit(:title, :start, :time).merge(issue_id: params[:issue_id])
+  end
+
+  def shift_task
   end
 end
