@@ -33,6 +33,18 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    task = Task.find(params[:id])
+    if task.destroy
+      redirect_to issues_path
+    else
+      @product = Product.find(params[:product_id])
+      @issue = Issue.find(params[:issue_id])
+      @task = Task.find(params[:id])
+      render :edit
+    end
+  end
+
   private
   def task_params
     params.require(:task).permit(:title, :start, :time).merge(issue_id: params[:issue_id])
