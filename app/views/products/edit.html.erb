@@ -4,3 +4,6 @@
 <%= f.submit "更新する" %>
 <%=link_to 'もどる', issues_path %>
 <% end %>
+<br>
+<br>
+<%= link_to 'この部品を削除する', product_path(@product.id), method: :delete %>
