@@ -8,7 +8,7 @@
 <%= link_to '担当部品を新規登録', new_product_path%>
 <br>
 <% issue_count = 0%>
-<% task_count = 0 %>
+
 <div class = "all_products_wrapper" id = "all_products_wrapper">
   <% @products.each do |product| %>
   <div class = "product_wrapper">
@@ -19,23 +19,7 @@
       <%= issue.summary %><br><%= link_to '編集', edit_product_issue_path(product.id, issue.id) %><br><%= link_to 'やる事を新規登録する', new_product_issue_task_path(product.id, issue.id) %>
       </div>
       <div class = "task_wrapper">
-      <% @tasks.where(issue_id: issue.id).each do |task|%>
-        <div class = "task_block">
-          <div class = "task_character" id = <%= "task_character_#{task_count}" %>>
-            <%= link_to task.title, edit_product_issue_task_path(product.id, issue.id, task.id) %>
-            .開始時間：<%= l task.start %> -> 
-            工数：<%= l task.time, format: :short%> -> 
-            終了時間：<%= l task.start + (task.time.hour * 3600) + (task.time.min * 60) %>
-            曜日：<%= task.start.wday %>
-          </div>
-          <div class ="task_bar" id = <%= "task_bar_#{task_count}" %>>
-            <div class = "task_start" value = <%= l task.start, format: :time_only %>></div>
-            <div class = "task_time" value = <%= (task.time.hour * 3600) + (task.time.min * 60) %>></div>
-            <div class = "task_wday" value = <%= task.start.wday %>></div>
-          </div>
-        </div>
-        <% task_count += 1 %>
-      <% end %>
+        <%= tasks(@tasks, issue, product) %>
       </div>
     </div>
     <% issue_count += 1 %>
