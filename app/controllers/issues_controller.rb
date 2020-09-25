@@ -3,7 +3,10 @@ class IssuesController < ApplicationController
     @products = Product.where(user_id: current_user.id)
     @issues = Issue.all
     todays_date = Date.today
-    @tasks = Task.where(start: (todays_date - todays_date.wday)..(todays_date - todays_date.wday + 7)).order(start: "ASC")
+    week_start = (Time.now - todays_date.wday * 86400 - Time.now.hour*3600 - Time.now.min*60  - Time.now.sec)
+    week_end = week_start + 604800;
+    @tasks = Task.where(start: week_start..week_end).order(start: "ASC")
+    
   end
   def new
     @issue = Issue.new
