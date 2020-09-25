@@ -35,6 +35,16 @@ class IssuesController < ApplicationController
       render :edit
     end
   end
+  def destroy
+    issue = Issue.find(params[:id])
+    if issue.destroy
+      redirect_to issues_path
+    else
+      @product = Product.find(params[:product_id])
+      @issue = Issue.find(params[:id])
+      render :edit
+    end
+  end
 
   private
   def issue_params
