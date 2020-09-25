@@ -4,6 +4,19 @@
   position: relative;
 }
 
+.date_disp{
+  position: absolute;
+  top: -32px;
+  font-size: 12px;
+  width: 150px
+}
+
+.time_disp{
+  position: absolute;
+  top: -16px;
+  font-size: 12px;
+}
+
 .vertical_line{
   height: 200px;
   position: absolute;
