@@ -42,9 +42,10 @@ class TasksController < ApplicationController
     #この処理、テーブルの結合でうまくできないのか？----------------------------------------------------------
     #担当部品のidを全て取得
     all_products_id = Array.new
-    Product.all.each do |product|
-      all_products_id << product.id
-    end
+    # Product.all.each do |product|
+    all_products_id << Product.where(user_id: current_user.id).ids
+    # end
+    
     #担当部品が抱える課題のidを全て取得
     all_issues_id = Array.new
     all_products_id.each do |product_id|
@@ -58,7 +59,6 @@ class TasksController < ApplicationController
     #自分の全てのタスクを取得
     ordered_tasks = Task.where(id: all_tasks_id).order(start: "ASC")
     #-------------------------------------------------------------------------------------------------
-    
     #新しいタスクが割り込みだったらそれ以降のタスクをシフトする
     new_task_end = @task.start + @task.time.min * 60 + @task.time.hour * 3600
     # new_task_man_hours = @task.time.min * 60 + @task.time.hour * 3600
@@ -66,7 +66,7 @@ class TasksController < ApplicationController
     changed = false
     ordered_tasks.each do |task|
       if changed == false
-        if @task.start < task.start && task.start < new_task_end
+        if @task.start <= task.start && task.start <= new_task_end
           difference = new_task_end - task.start
           task.update(start: task.start + difference)
           changed = true
