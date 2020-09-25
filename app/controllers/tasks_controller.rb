@@ -53,6 +53,15 @@ class TasksController < ApplicationController
     
   end
 
+  def edit
+    @product = Product.find(params[:product_id])
+    @issue = Issue.find(params[:issue_id])
+    @task = Task.find(params[:id])
+  end
+
+  def update
+  end
+
   private
   def task_params
     params.require(:task).permit(:title, :start, :time).merge(issue_id: params[:issue_id])

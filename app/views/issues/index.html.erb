@@ -22,7 +22,7 @@
       <% @tasks.where(issue_id: issue.id).each do |task|%>
         <div class = "task_block">
           <div class = "task_character" id = <%= "task_character_#{task_count}" %>>
-            <%= task.title %> <br>
+            <%= link_to task.title, edit_product_issue_task_path(product.id, issue.id, task.id) %> <br>
             .開始時間：<%= l task.start %> -> 
             工数：<%= l task.time, format: :short%> -> 
             終了時間：<%= l task.start + (task.time.hour * 3600) + (task.time.min * 60) %>

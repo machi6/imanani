@@ -1,0 +1,12 @@
+<h1>Tasks#edit</h1>
+<%= form_with model: @task , url: "#", method: :post, local: true do |f| %>
+  やる事：<%= f.text_field :title %>
+  <br>
+  いつから始める？<%= f.datetime_select :start %>
+  <br>
+  どのくらいかかる？<%= f.time_select :time %>
+  <br>
+<%= f.submit "新規作成する" %>
+<br>
+<%=link_to 'もどる', issues_path %>
+<% end %>
