@@ -23,6 +23,15 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
+  def destroy
+    product = Product.find(params[:id])
+    if product.destroy
+      redirect_to issues_path
+    else
+      @product = Product.find(params[:id])
+      render :edit
+    end
+  end
 
   private
   def product_params

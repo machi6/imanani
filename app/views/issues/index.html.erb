@@ -12,7 +12,7 @@
 <div class = "all_products_wrapper" id = "all_products_wrapper">
   <% @products.each do |product| %>
   <div class = "product_wrapper">
-    <%= product.name %>：<%= link_to '編集', edit_product_path(product.id) %>：<%= link_to '課題を新規登録する', new_product_issue_path(product.id) %><br>
+    <%= link_to product.name, edit_product_path(product.id) %>：<%= link_to '課題を新規登録する', new_product_issue_path(product.id) %><br>
     <% @issues.where(product_id: product.id).each do |issue| %>
     <div class = "issue_wrapper" id = <%= "issue_wrapper_#{issue_count}" %>>
       <div class = "issue_title">
