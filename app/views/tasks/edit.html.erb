@@ -6,7 +6,9 @@
   <br>
   どのくらいかかる？<%= f.time_select :time %>
   <br>
-<%= f.submit "変更する" %>
-<br>
-<%=link_to 'もどる', issues_path %>
+  <%= f.submit "変更する" %>
 <% end %>
+<%=link_to 'もどる', issues_path %>
+<br>
+<br>
+<%= link_to 'このタスクを削除する', product_issue_task_path(@product.id, @issue.id, @task.id), method: :delete %>

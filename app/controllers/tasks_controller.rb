@@ -33,6 +33,10 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    
+  end
+
   private
   def task_params
     params.require(:task).permit(:title, :start, :time).merge(issue_id: params[:issue_id])
