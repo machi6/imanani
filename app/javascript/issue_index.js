@@ -1,4 +1,13 @@
 window.addEventListener('load', function(){
+  //縦線の調整
+  let vertical_line_height = document.getElementById("all_products_wrapper").clientHeight;
+  console.log(vertical_line_height);
+  for(i = 0; i<168; i++){
+    let vertical_line = document.getElementById("vertical_line_" + String(i));
+    vertical_line.setAttribute("style", `left: ${i*60+360}px; height: ${vertical_line_height}px;`);
+  }
+
+  //タスクの位置を調整
   let num_of_all_issue = document.getElementsByClassName("issue_wrapper").length;
   console.log(num_of_all_issue);
   let task_start_element = document.getElementsByClassName("task_start");

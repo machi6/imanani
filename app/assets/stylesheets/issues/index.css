@@ -1,3 +1,21 @@
+.all_products_wrapper{
+  padding:5px;
+  margin: 5px;
+  position: relative;
+}
+
+.vertical_line{
+  height: 200px;
+  position: absolute;
+  width: 100px;
+  height: 500px;
+  top: 0px;
+  left : 360px;
+  border-left: solid 1px gray;
+  z-index: -1; 
+}
+
+
 .product_wrapper{
   padding:5px;
   margin: 5px;
