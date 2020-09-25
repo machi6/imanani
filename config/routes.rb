@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, only:[:index, :show]
   resources :products, only:[:new, :create, :edit, :update] do
     resources :issues, only:[:new, :create, :edit, :update] do
-      resources :tasks, only:[:new, :create] do
+      resources :tasks, only:[:new, :create, :edit, :update] do
       end
     end
   end
