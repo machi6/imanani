@@ -1,0 +1,4 @@
+<div class = "product_wrapper">
+  <%= link_to product.name, edit_product_path(product.id) %>：<%= link_to '課題を新規登録する', new_product_issue_path(product.id) %><br>
+  <%= issues(@issues, product) %>
+</div>
