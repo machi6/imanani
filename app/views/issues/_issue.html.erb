@@ -1,0 +1,8 @@
+<div class = "issue_wrapper" id = <%= "issue_wrapper_#{issue_count}" %>>
+  <div class = "issue_title">
+  <%= issue.summary %><br><%= link_to '編集', edit_product_issue_path(product.id, issue.id) %><br><%= link_to 'やる事を新規登録する', new_product_issue_task_path(product.id, issue.id) %>
+  </div>
+  <div class = "task_wrapper">
+    <%= tasks(@tasks, issue, product) %>
+  </div>
+</div>
