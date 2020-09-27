@@ -1,9 +1,9 @@
 <h1>Issue#edit</h1>
-<%= form_with model: @issue, url: product_issue_path(@product.id, @issue.id) , method: :patch, local: true do |f| %>
+<%= form_with model: @issue, url: user_product_issue_path , method: :patch, local: true do |f| %>
   課題を簡潔に入力してください：<%= f.text_field :summary, value:@issue.summary %>
 <%= f.submit "更新する" %>
 <% end %>
-<%=link_to 'もどる', issues_path %>
+<%=link_to 'もどる', user_path(@user.id) %>
 <br>
 <br>
-<%= link_to 'この課題を削除する', product_issue_path(@product.id, @issue.id), method: :delete %>
+<%= link_to 'この課題を削除する', user_product_issue_path(@user.id, @product.id, @issue.id), method: :delete %>

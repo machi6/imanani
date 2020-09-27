@@ -1,9 +1,9 @@
 <h1>Product#edit</h1>
-<%= form_with model: @product, url: product_path(@product.id), method: :patch, local: true do |f| %>
+<%= form_with model: @product, url: user_product_path, method: :patch, local: true do |f| %>
   部品名：<%= f.text_field :name , placeholder:"例）CTR PLR", value:@product.name %>
 <%= f.submit "更新する" %>
-<%=link_to 'もどる', issues_path %>
+<%=link_to 'もどる', user_path(@user.id) %>
 <% end %>
 <br>
 <br>
-<%= link_to 'この部品を削除する', product_path(@product.id), method: :delete %>
+<%= link_to 'この部品を削除する', user_product_path(@user.id, @product.id), method: :delete %>

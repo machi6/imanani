@@ -1,30 +1,41 @@
 class TasksController < ApplicationController
+  #before_action :get_info , only: [:create, :edit, :update, :destory]
+
   def new
     @task = Task.new
+    @user = User.find(params[:user_id])
   end
   def create
     @task = Task.new(task_params)
+    @issue = Issue.new
+    @product = Product.find(params[:product_id])
+    @user = User.find(params[:user_id])
     if @task.valid?
       shift_task
       @task.save
-      redirect_to issues_path
+      redirect_to user_path(params[:user_id])
     else
+      @task = Task.new(task_params)
+      @issue = Issue.new
+      @product = Product.find(params[:product_id])
+      @user = User.find(params[:user_id])
       render :new
     end
   end
 
   def edit
+    @task = Task.find(params[:id])
     @product = Product.find(params[:product_id])
     @issue = Issue.find(params[:issue_id])
-    @task = Task.find(params[:id])
+    @user = User.find(params[:user_id])
   end
 
   def update
+    @user = User.find(params[:user_id])
     @task = Task.find(params[:id])
-    if @task.valid?
-      shift_task
-      @task.update(task_params)
-      redirect_to issues_path
+    if @task.update(task_params)
+      #shift_task
+      redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
       @issue = Issue.find(params[:issue_id])
@@ -34,18 +45,28 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.find(params[:id])
-    if task.destroy
-      redirect_to issues_path
+    @product = Product.find(params[:product_id])
+    @issue = Issue.find(params[:issue_id])
+    @user = User.find(params[:user_id])
+    @task = Task.find(params[:id])
+    if @task.destroy
+      redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
       @issue = Issue.find(params[:issue_id])
+      @user = User.find(params[:user_id])
       @task = Task.find(params[:id])
       render :edit
     end
   end
 
   private
+  def get_info
+    @user = User.find(params[:user_id])
+    @issue = Issue.find(params[:issue_id])
+    @product = Product.find(params[:product_id])
+  end
+
   def task_params
     params.require(:task).permit(:title, :start, :time).merge(issue_id: params[:issue_id])
   end
