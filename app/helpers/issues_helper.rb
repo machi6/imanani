@@ -3,7 +3,7 @@ module IssuesHelper
     html = ''
     issue_count = 0
     issues.where(product_id: product.id).each do |issue|
-      html += render(partial: 'issue', locals: {product: product, issue: issue, issue_count: issue_count})
+      html += render(partial: 'issues/issue', locals: {product: product, issue: issue, issue_count: issue_count})
       issue_count += 1
     end
     raw(html)
@@ -17,11 +17,11 @@ module IssuesHelper
     168.times do |i|
       if i % 24 == 0
         hour_ = 0
-        html += render(partial: 'date_disp', locals: {wday_: wday_, wday_num: wday_num})
+        html += render(partial: 'issues/date_disp', locals: {wday_: wday_, wday_num: wday_num})
         wday_num += 1
       end
-      html += render(partial: 'time_disp', locals: {hour_: hour_, i: i})
-      html += render(partial: 'vertical_line', locals: {i: i})
+      html += render(partial: 'issues/time_disp', locals: {hour_: hour_, i: i})
+      html += render(partial: 'issues/vertical_line', locals: {i: i})
       hour_ += 1
     end
     raw(html)
