@@ -1,60 +1,13 @@
-<%# <% require "date" %>
 <% if user_signed_in? %>
 　　<h2><%= current_user.nickname %>のトップページ</h2>
 <% end %>
 <%= link_to '自分以外のスケジュールを確認する', users_path %>
-
 <h1>Issues#index</h1>
 <%= link_to '担当部品を新規登録', new_product_path%>
 <br>
-<% issue_count = 0%>
-<% task_count = 0 %>
 <div class = "all_products_wrapper" id = "all_products_wrapper">
-  <% @products.each do |product| %>
-  <div class = "product_wrapper">
-    <%= link_to product.name, edit_product_path(product.id) %>：<%= link_to '課題を新規登録する', new_product_issue_path(product.id) %><br>
-    <% @issues.where(product_id: product.id).each do |issue| %>
-    <div class = "issue_wrapper" id = <%= "issue_wrapper_#{issue_count}" %>>
-      <div class = "issue_title">
-      <%= issue.summary %><br><%= link_to '編集', edit_product_issue_path(product.id, issue.id) %><br><%= link_to 'やる事を新規登録する', new_product_issue_task_path(product.id, issue.id) %>
-      </div>
-      <div class = "task_wrapper">
-      <% @tasks.where(issue_id: issue.id).each do |task|%>
-        <div class = "task_block">
-          <div class = "task_character" id = <%= "task_character_#{task_count}" %>>
-            <%= link_to task.title, edit_product_issue_task_path(product.id, issue.id, task.id) %>
-            .開始時間：<%= l task.start %> -> 
-            工数：<%= l task.time, format: :short%> -> 
-            終了時間：<%= l task.start + (task.time.hour * 3600) + (task.time.min * 60) %>
-            曜日：<%= task.start.wday %>
-          </div>
-          <div class ="task_bar" id = <%= "task_bar_#{task_count}" %>>
-            <div class = "task_start" value = <%= l task.start, format: :time_only %>></div>
-            <div class = "task_time" value = <%= (task.time.hour * 3600) + (task.time.min * 60) %>></div>
-            <div class = "task_wday" value = <%= task.start.wday %>></div>
-          </div>
-        </div>
-        <% task_count += 1 %>
-      <% end %>
-      </div>
-    </div>
-    <% issue_count += 1 %>
-    <%end%>
-  </div>
-  <%end%>
-  <% hour = 0 %>
-  <% wday = ["日", "月", "火", "水", "木", "金", "土"] %>
-  <% wday_num = 0 %>
-  <% 168.times do |i| %>
-    <% if i % 24 == 0 %>
-      <% hour = 0 %>
-      <div class = "date_disp" id = <%= "date_disp_#{wday_num}"%>> <%= l (Date.today - Date.today.wday), format: :short%> <%= wday[wday_num] %></div>
-      <% wday_num += 1 %>
-    <% end %>
-    <div class = "time_disp" id = <%= "time_disp_#{i}"%>> <%= hour %>:00 </div>
-    <div class = "vertical_line" id = <%= "vertical_line_#{i}"%>></div>
-    <% hour += 1 %>
-  <% end %>
+  <%= products(@products) %>
+  <%= schedule_lines %>
 </div>
 <br>
 <% if user_signed_in? %>
