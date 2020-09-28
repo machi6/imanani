@@ -12,6 +12,7 @@
 .main{
   padding:5px;
   margin: 5px;
+  position: relative;
 }
 
 .product{
@@ -23,4 +24,28 @@
 .issue{
   padding:5px;
   margin: 5px;
+}
+
+.date_disp{
+  position: absolute;
+  top: -32px;
+  font-size: 12px;
+  width: 150px
+}
+
+.time_disp{
+  position: absolute;
+  top: -16px;
+  font-size: 12px;
+}
+
+.vertical_line{
+  height: 200px;
+  position: absolute;
+  width: 100px;
+  /* height: 500px; */
+  top: 0px;
+  /* left : 360px; */
+  border-left: solid 1px gray;
+  z-index: -1; 
 }

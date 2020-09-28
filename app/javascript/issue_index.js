@@ -1,19 +1,19 @@
 window.addEventListener('load', function(){
   //縦線の調整
-  let vertical_line_height = document.getElementById("all_products_wrapper").clientHeight;
+  let vertical_line_height = document.getElementById("main").clientHeight;
   console.log(vertical_line_height);
   let ite_date = 0;
   for(i = 0; i<168; i++){
     if (i % 24 == 0){
       let date_disp = document.getElementById("date_disp_" + String(ite_date));
-      date_disp.setAttribute("style", `left: ${ite_date*1440+360}px;`)
+      date_disp.setAttribute("style", `left: ${ite_date*1440}px;`)
       ite_date += 1;
       }
     let time_disp = document.getElementById("time_disp_" + String(i));
-    time_disp.setAttribute("style", `left: ${i*60+360}px;`)
+    time_disp.setAttribute("style", `left: ${i*60}px;`)
 
     let vertical_line = document.getElementById("vertical_line_" + String(i));
-    vertical_line.setAttribute("style", `left: ${i*60+360}px; height: ${vertical_line_height}px;`);
+    vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px;`);
     
   }
 
