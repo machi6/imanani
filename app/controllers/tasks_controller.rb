@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     @product = Product.find(params[:product_id])
     @user = User.find(params[:user_id])
     if @task.valid?
-      shift_task
+      #shift_task
       @task.save
       redirect_to user_path(params[:user_id])
     else
