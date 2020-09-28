@@ -1,22 +1,4 @@
 module IssuesHelper
-  def issues(issues, product, user_)
-    html = ''
-    issue_count = 0
-    issues.where(product_id: product.id).each do |issue|
-      html += render(partial: 'issues/issue', locals: {product: product, issue: issue, issue_count: issue_count, user_: user_ })
-      issue_count += 1
-    end
-    raw(html)
-  end
-
-  def issues_(issues)
-    html = ''
-    issues.each do |issue|
-      html += render(partial: 'issues/issue2', locals: {issue: issue })
-    end
-    raw(html)
-  end
-
   def schedule_lines
     html = ''
     hour_ = 0

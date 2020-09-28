@@ -9,18 +9,12 @@
 <br>
 <%= link_to '担当部品を新規登録', new_user_product_path(@user.id)%>
 <br>
-<%# <div class = "all_products_wrapper" id = "all_products_wrapper"> %>
-  <%# <%= products(@products, @user) %>
-   
-<%# </div> %>
-
   <div class = "all_wrapper">
     <div class = "side">
-      <%= products_(@products) %>
-      <%# <%= issues_(@issues) %>
+      <%= products(@products) %>
     </div>
     <div class = "main">
-      <%= tasks_(@tasks) %>
+      <%= tasks(@tasks) %>
       <%= schedule_lines %>
     </div>
   </div>
