@@ -1,0 +1,7 @@
+<div class = "task">
+    <%= link_to task.title, edit_user_product_issue_task_path(task.issue.product.user_id, task.issue.product_id, task.issue_id, task.id) %>
+    .開始時間：<%= l task.start  %> -> 
+    工数：<%= l task.time, format: :short%> -> 
+    終了時間：<%= l task.start + (task.time.hour * 3600) + (task.time.min * 60) %>
+    曜日：<%= task.start.wday %>
+</div>

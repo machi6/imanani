@@ -9,6 +9,14 @@ module IssuesHelper
     raw(html)
   end
 
+  def issues_(issues)
+    html = ''
+    issues.each do |issue|
+      html += render(partial: 'issues/issue2', locals: {issue: issue })
+    end
+    raw(html)
+  end
+
   def schedule_lines
     html = ''
     hour_ = 0

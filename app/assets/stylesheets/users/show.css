@@ -1,0 +1,26 @@
+.all_wrapper{
+  display: flex;
+}
+
+.side{
+  padding:5px;
+  margin: 5px;
+  position: relative;
+  width: 400px;
+}
+
+.main{
+  padding:5px;
+  margin: 5px;
+}
+
+.product{
+  padding:5px;
+  margin: 5px;
+  /* position: absolute; */
+}
+
+.issue{
+  padding:5px;
+  margin: 5px;
+}

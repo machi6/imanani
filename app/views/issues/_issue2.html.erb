@@ -1,0 +1,4 @@
+<div class = "issue">
+  <%= issue.summary %><br><%= link_to '編集', edit_user_product_issue_path(product.user_id, issue.product_id, issue.id) %>
+  <br><%= link_to 'やる事を新規登録する', new_user_product_issue_task_path(product.user_id, issue.product_id, issue.id) %>
+</div>
