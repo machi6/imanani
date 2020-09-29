@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     week_start = (Time.now - todays_date.wday * 86400 - Time.now.hour*3600 - Time.now.min*60  - Time.now.sec)
     week_end = week_start + 604800; #604800...1週間分の秒数
     @products = Product.where(user_id: params[:id]).includes(:issues)
+    #@tasks = Product.where(user_id: params[:id]).where(start: week_start..week_end).includes(issues: :products).order(start: "ASC")
     @tasks = Task.includes(issue: :product).where(products: { user_id: params[:id]}).where(start: week_start..week_end).order(start: "ASC")
     #@products_main.where(issues: {summary: "BEAM CP Fの課題１"})
   end
