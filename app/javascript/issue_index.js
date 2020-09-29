@@ -10,7 +10,7 @@ window.addEventListener('load', function(){
     else{ return document.getElementById((task[0].id)).clientHeight;}
   }
 
-  //issueの高さの調整
+  //issueの縦幅の調整
   let tasks_ = document.getElementsByClassName("task");
   let issue_ids_from_tasks = [];
   for (i = 0; i<tasks_.length; i++){
@@ -50,12 +50,12 @@ window.addEventListener('load', function(){
 
   //タスクの位置を調整
   let tasks = document.getElementsByClassName("task");
-  //issueに応じた位置に設定
   let parent_issue_id_stack = [];
   for (i = 0; i<tasks.length; i++){
+    //縦位置の調整
     let issue_id = convert_parent_issue_id(tasks_[i]);
     let task_top = document.getElementById(issue_id).offsetTop;
-    //一つのissueにtaskが重複している場合はずらす調整を加える
+    //一つのissueにtaskが重複している場合は縦にずらす調整を加える
     for(j = 0; j < parent_issue_id_stack.length; j++){
       if(parent_issue_id_stack[j] == issue_id){
         task_top += get_task_height();
@@ -63,7 +63,19 @@ window.addEventListener('load', function(){
     }
     parent_issue_id_stack.push(issue_id);
     document.getElementById(tasks[i].id).setAttribute("style", `top: ${task_top}px;`);
+    //横位置の調整
+    //console.log( document.getElementById(tasks[i].id).dataset.start);
+    console.log( tasks[i].dataset.start);
+    
+    time = tasks[i].dataset.start.split(':');
+    let start_time_H = Number(time[0]);//15:30開始なら15
+    let start_time_M = Number(time[1]);//15:30開始なら30
+    let start_time_wday = Number(tasks[i].dataset.wday);
+    let start_pos = (start_time_H * 60) + (start_time_M) + (start_time_wday * 1440);
+    document.getElementById(tasks[i].id).setAttribute("style", `top: ${task_top}px; left: ${start_pos}px;`);
   }
+
+  //タスクの横位置を修正
   
 
   // let num_of_all_issue = document.getElementsByClassName("issue_wrapper").length;
@@ -76,6 +88,8 @@ window.addEventListener('load', function(){
   //   for( ; i<task_start_element.length; i++){
   //     //1minで1px 1hourで60px 1dayで1440px
   //     let start_time_H = Number(task_start_element[i].getAttribute("value").split(':')[0]);//15:30開始なら15
+
+
   //     let start_time_M = Number(task_start_element[i].getAttribute("value").split(':')[1]);//15:30開始なら30
   //     let start_time_wday = task_wday_element[i].getAttribute("value");
   //     console.log(start_time_wday);

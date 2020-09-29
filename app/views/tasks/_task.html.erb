@@ -1,5 +1,6 @@
-<div class = "task" data-start=<%= "#{l task.start, format: :time_only_wo_colon}" %> 
+<div class = "task" data-start=<%= "#{l task.start, format: :time_only}" %> 
                     data-time=<%= "#{l task.time, format: :time_only}" %> 
+                    data-wday=<%= "#{task.start.wday}" %> 
                     id = <%= "task_#{task.issue.product.id}_#{task.issue.id}|#{task.id}"  %>>
     <%= link_to task.title, edit_user_product_issue_task_path(task.issue.product.user_id, task.issue.product_id, task.issue_id, task.id) %>
     .開始時間：<%= l task.start  %> -> 
