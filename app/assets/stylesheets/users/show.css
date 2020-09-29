@@ -38,15 +38,19 @@ body {
 
 .date_disp{
   position: absolute;
-  top: -32px;
+  top: 0px;
   font-size: 12px;
-  width: 150px
+  background-color: white;
+  width: 150px;
+  z-index: +2; 
 }
 
 .time_disp{
   position: absolute;
-  top: -16px;
-  font-size: 12px;
+  top: 15px;
+  font-size: 14px;
+  background-color: white;
+  z-index: +2; 
 }
 
 .vertical_line{

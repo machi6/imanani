@@ -1,27 +1,27 @@
-<%= @user.nickname %>さん<%= '(あなた)' if @user.id == current_user.id %>のスケジュール
-<br>
-<% back_message = '戻る' %>
-<% if @user.id == current_user.id %>
-  <% back_message = '自分以外のスケジュールを確認する' %>
-<% end %>
-<%= link_to back_message, users_path %>
+<div class = "all_wrapper">
+  <div class = "side" id = "side">
+    <%= @user.nickname %>さん<%= '(あなた)' if @user.id == current_user.id %>のスケジュール
+    <br>
+    <% back_message = '戻る' %>
+    <% if @user.id == current_user.id %>
+      <% back_message = '自分以外のスケジュールを確認する' %>
+    <% end %>
+    <%= link_to back_message, users_path %>
 
-<br>
-<%= link_to '担当部品を新規登録', new_user_product_path(@user.id)%>
-<br>
-  <div class = "all_wrapper">
-    <div class = "side" id = "side">
-      <%= products(@products) %>
-    </div>
-    <div class = "main" id = "main">
-      <%= tasks(@tasks) %>
-      <%= schedule_lines %>
-    </div>
+    <br>
+    <%= link_to '担当部品を新規登録', new_user_product_path(@user.id)%>
+    <br>
+    <%= products(@products) %>
+    <% if user_signed_in? %>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout"  %>
+    <% end %>
   </div>
+  <div class = "main" id = "main">
+    <%= tasks(@tasks) %>
+    <%= schedule_lines %>
+  </div>
+</div>
 
   
 
 
-<% if user_signed_in? %>
-  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout"  %>
-<% end %>
