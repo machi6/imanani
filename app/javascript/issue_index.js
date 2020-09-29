@@ -63,45 +63,21 @@ window.addEventListener('load', function(){
     }
     parent_issue_id_stack.push(issue_id);
     document.getElementById(tasks[i].id).setAttribute("style", `top: ${task_top}px;`);
-    //横位置の調整
-    //console.log( document.getElementById(tasks[i].id).dataset.start);
-    console.log( tasks[i].dataset.start);
     
-    time = tasks[i].dataset.start.split(':');
-    let start_time_H = Number(time[0]);//15:30開始なら15
-    let start_time_M = Number(time[1]);//15:30開始なら30
+    //1minで1px 1hourで60px 1dayで1440px
+    //横位置の調整
+    start = tasks[i].dataset.start.split(':');
+    let start_time_H = Number(start[0]);//15:30開始なら15
+    let start_time_M = Number(start[1]);//15:30開始なら30
     let start_time_wday = Number(tasks[i].dataset.wday);
     let start_pos = (start_time_H * 60) + (start_time_M) + (start_time_wday * 1440);
     document.getElementById(tasks[i].id).setAttribute("style", `top: ${task_top}px; left: ${start_pos}px;`);
+    
+    time = tasks[i].dataset.time.split(':');
+    let time_H = Number(time[0]);
+    let time_M = Number(time[1]);
+    let bar_width = time_H * 60 + time_M;
+    bar_id = tasks[i].id.replace('task', 'bar');
+    document.getElementById(bar_id).setAttribute("style", `width: ${bar_width}px;`);
   }
-
-  //タスクの横位置を修正
-  
-
-  // let num_of_all_issue = document.getElementsByClassName("issue_wrapper").length;
-  // console.log(num_of_all_issue);
-  // let task_start_element = document.getElementsByClassName("task_start");
-  // let task_time_element = document.getElementsByClassName("task_time");
-  // let task_wday_element = document.getElementsByClassName("task_wday");
-  // let i = 0;
-  // for (h = 0; h< num_of_all_issue; h++){
-  //   for( ; i<task_start_element.length; i++){
-  //     //1minで1px 1hourで60px 1dayで1440px
-  //     let start_time_H = Number(task_start_element[i].getAttribute("value").split(':')[0]);//15:30開始なら15
-
-
-  //     let start_time_M = Number(task_start_element[i].getAttribute("value").split(':')[1]);//15:30開始なら30
-  //     let start_time_wday = task_wday_element[i].getAttribute("value");
-  //     console.log(start_time_wday);
-  //     let start_pos = (start_time_H * 60) + (start_time_M) + (start_time_wday * 1440);
-      
-  //     let width = Number(task_time_element[i].getAttribute("value"));//1Hかかるなら3600(秒)
-  
-
-  //     let task_bar = document.getElementById("task_bar_" + String(i));
-  //     task_bar.setAttribute("style", `width:${width/60}px; margin-left: ${start_pos}px;`);
-  //     let task_character = document.getElementById("task_character_" + String(i));
-  //     task_character.setAttribute("style", `margin-left: ${start_pos}px;`);
-  //   }
-  // }
 })

@@ -7,4 +7,6 @@
     工数：<%= l task.time, format: :short%> -> 
     終了時間：<%= l task.start + (task.time.hour * 3600) + (task.time.min * 60) %>
     曜日：<%= task.start.wday %>
+    <div class = "bar" id = <%= "bar_#{task.issue.product.id}_#{task.issue.id}|#{task.id}"%>>
+    </div>
 </div>
