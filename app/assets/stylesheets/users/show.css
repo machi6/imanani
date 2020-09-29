@@ -49,3 +49,8 @@
   border-left: solid 1px gray;
   z-index: -1; 
 }
+
+.task{
+  position: absolute;
+  white-space: nowrap;
+}

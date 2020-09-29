@@ -1,7 +1,39 @@
 window.addEventListener('load', function(){
-  //縦線の調整
+  //関数群
+  function convert_parent_issue_id(task){
+    return task.id.split('|')[0].replace('task', 'issue')
+  }
+  function get_task_height(){
+    //do not call this function when there is no task at any issues. 
+    task = document.getElementsByClassName("task");
+    if(task.length == 0) {return;}
+    else{ return document.getElementById((task[0].id)).clientHeight;}
+  }
+
+  //issueの高さの調整
+  let tasks_ = document.getElementsByClassName("task");
+  let issue_ids_from_tasks = [];
+  for (i = 0; i<tasks_.length; i++){
+    issue_ids_from_tasks.push(convert_parent_issue_id(tasks_[i]));
+  }
+
+  let issue_ids = [];
+  let issues_ = document.getElementsByClassName("issue");
+  for (i = 0; i < issues_.length; i++){
+    issue_ids.push(issues_[i].id);
+  }
+  for(i = 0; i<issue_ids.length; i++){
+    count = 0;
+    for(j = 0; j< issue_ids_from_tasks.length; j++){
+      if(issue_ids[i] == issue_ids_from_tasks[j]){count += 1;}
+    }
+    if(count > 3){
+      document.getElementById(issue_ids[i]).setAttribute("style", `height: ${(count + 1) * get_task_height()}px;`);
+    }
+  }
+
+  //縦線の位置を設定
   let vertical_line_height = document.getElementById("main").clientHeight;
-  console.log(vertical_line_height);
   let ite_date = 0;
   for(i = 0; i<168; i++){
     if (i % 24 == 0){
@@ -14,10 +46,26 @@ window.addEventListener('load', function(){
 
     let vertical_line = document.getElementById("vertical_line_" + String(i));
     vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px;`);
-    
   }
 
-  // //タスクの位置を調整
+  //タスクの位置を調整
+  let tasks = document.getElementsByClassName("task");
+  //issueに応じた位置に設定
+  let parent_issue_id_stack = [];
+  for (i = 0; i<tasks.length; i++){
+    let issue_id = convert_parent_issue_id(tasks_[i]);
+    let task_top = document.getElementById(issue_id).offsetTop;
+    //一つのissueにtaskが重複している場合はずらす調整を加える
+    for(j = 0; j < parent_issue_id_stack.length; j++){
+      if(parent_issue_id_stack[j] == issue_id){
+        task_top += get_task_height();
+      }
+    }
+    parent_issue_id_stack.push(issue_id);
+    document.getElementById(tasks[i].id).setAttribute("style", `top: ${task_top}px;`);
+  }
+  
+
   // let num_of_all_issue = document.getElementsByClassName("issue_wrapper").length;
   // console.log(num_of_all_issue);
   // let task_start_element = document.getElementsByClassName("task_start");
