@@ -1,5 +1,5 @@
 <h1>Tasks#new</h1>
-<%= form_with model: @task , url: product_issue_tasks_path, method: :post, local: true do |f| %>
+<%= form_with model: @task , url: user_product_issue_tasks_path, method: :post, local: true do |f| %>
   やる事：<%= f.text_field :title %>
   <br>
   いつから始める？<%= f.datetime_select :start %>
@@ -8,5 +8,5 @@
   <br>
 <%= f.submit "新規作成する" %>
 <br>
-<%=link_to 'もどる', issues_path %>
+<%=link_to 'もどる', user_path(@user.id) %>
 <% end %>

@@ -1,47 +1,48 @@
 class IssuesController < ApplicationController
-  def index
-    @products = Product.where(user_id: current_user.id)
-    @issues = Issue.all
-    todays_date = Date.today
-    week_start = (Time.now - todays_date.wday * 86400 - Time.now.hour*3600 - Time.now.min*60  - Time.now.sec)
-    week_end = week_start + 604800; #604800...1週間分の秒数
-    @tasks = Task.where(start: week_start..week_end).order(start: "ASC")
-    
-  end
   def new
     @issue = Issue.new
     @product = Product.find(params[:product_id])
+    @user = User.find(params[:user_id])
   end
   def create
     @issue = Issue.new(issue_params)
+    @user = User.find(params[:user_id])
     if @issue.valid?
       @issue.save
-      redirect_to issues_path
+      redirect_to user_path(params[:user_id])
     else
-    redirect_to new_product_issue_path(params[:product_id])
+      @issue = Issue.new
+      @product = Product.find(params[:product_id])
+      @user = User.find(params[:user_id])
+      render :new
     end
   end
   def edit
     @product = Product.find(params[:product_id])
     @issue = Issue.find(params[:id])
+    @user = User.find(params[:user_id])
   end
   def update
     @issue = Issue.find(params[:id])
+    @user = User.find(params[:user_id])
     if @issue.update(issue_params)
-      redirect_to issues_path
+      redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
       @issue = Issue.find(params[:id])
+      @user = User.find(params[:user_id])
       render :edit
     end
   end
   def destroy
     issue = Issue.find(params[:id])
+    @user = User.find(params[:user_id])
     if issue.destroy
-      redirect_to issues_path
+      redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
       @issue = Issue.find(params[:id])
+      @user = User.find(params[:user_id])
       render :edit
     end
   end

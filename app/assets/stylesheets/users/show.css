@@ -1,0 +1,62 @@
+.all_wrapper{
+  display: flex;
+}
+
+.side{
+  padding:5px;
+  margin: 5px;
+  position: relative;
+  width: 400px;
+}
+
+.main{
+  padding:5px;
+  margin: 5px;
+  position: relative;
+}
+
+.product{
+  padding:5px;
+  margin: 5px;
+  /* position: absolute; */
+  border: solid 1px black;
+}
+
+.issue{
+  padding:5px;
+  margin: 5px;
+}
+
+.date_disp{
+  position: absolute;
+  top: -32px;
+  font-size: 12px;
+  width: 150px
+}
+
+.time_disp{
+  position: absolute;
+  top: -16px;
+  font-size: 12px;
+}
+
+.vertical_line{
+  height: 200px;
+  position: absolute;
+  width: 100px;
+  /* height: 500px; */
+  top: 0px;
+  /* left : 360px; */
+  border-left: solid 1px gray;
+  z-index: -1; 
+}
+
+.task{
+  position: absolute;
+  white-space: nowrap;
+}
+
+.bar{
+  height: 10px;
+  background-color: lightblue;
+}

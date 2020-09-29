@@ -1,8 +1,9 @@
 <h1>登録者一覧</h1>
+<%= link_to 'マイページへ', user_path(current_user.id) %>
   <% @users.each do |user|%>
   <% if user.id != current_user.id %>
     <%= link_to user.nickname, user_path(user.id)%>
   <% end %>
   <br>
 <% end %>
-<%= link_to 'もどる', issues_path %>
+<%= link_to 'もどる', user_path(current_user.id) %>
