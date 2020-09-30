@@ -18,7 +18,12 @@
   </div>
   <div class = "main" id = "main">
     <%= tasks(@tasks) %>
-    <%= schedule_lines %>
+    <div class = "day">
+      <%= date_disp_ %>
+      <%= time_disp_ %>
+    </div>
+    <%= schedule_lines_ %>
+    <%# <%= schedule_lines %>
   </div>
 </div>
 
