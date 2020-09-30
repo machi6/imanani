@@ -81,3 +81,23 @@ window.addEventListener('load', function(){
     document.getElementById(bar_id).setAttribute("style", `width: ${bar_width}px;`);
   }
 })
+
+
+
+// var isRunning = false
+// window.addEventListener('scroll', function() {
+//   // 呼び出されるまで何もしない
+//   if (!isRunning) {
+//     isRunning = true
+
+//     // 描画する前のタイミングで呼び出してもらう
+//     window.requestAnimationFrame(function() {
+
+//       // ここでなにか処理をする
+//       //console.log(window.pageYOffset)
+//       console.log(window.pageXOffset)
+//       document.getElementById("side").setAttribute("style", `left: ${window.pageXOffset}px;`);
+//       isRunning = false
+//     })
+//   }
+// })

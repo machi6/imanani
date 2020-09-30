@@ -1,3 +1,7 @@
+body {
+  width: 10520px;
+}
+
 .all_wrapper{
   display: flex;
 }
@@ -7,6 +11,24 @@
   margin: 5px;
   position: relative;
   width: 400px;
+  background-color: whitesmoke;
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: +3;
+}
+
+.product{
+  padding:5px;
+  margin: 5px;
+  /* position: absolute; */
+  border: solid 2px gray;
+}
+
+.issue{
+  padding:5px;
+  margin: 5px;
+  border-bottom: solid 1px gray;
 }
 
 .main{
@@ -15,40 +37,39 @@
   position: relative;
 }
 
-.product{
-  padding:5px;
-  margin: 5px;
-  /* position: absolute; */
-  border: solid 1px black;
-}
-
-.issue{
-  padding:5px;
-  margin: 5px;
+.day{
+  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
 }
 
 .date_disp{
   position: absolute;
-  top: -32px;
+  top: 0px;
   font-size: 12px;
-  width: 150px
+  background-color: white;
+  width: 150px;
+  z-index: +2; 
 }
 
 .time_disp{
   position: absolute;
-  top: -16px;
-  font-size: 12px;
+  top: 15px;
+  font-size: 14px;
+  background-color: white;
+  z-index: +2; 
 }
 
 .vertical_line{
   height: 200px;
   position: absolute;
-  width: 100px;
+  width: 10px;
   /* height: 500px; */
   top: 0px;
   /* left : 360px; */
   border-left: solid 1px gray;
-  z-index: -1; 
+  z-index: +1; 
 }
 
 .task{
@@ -59,4 +80,5 @@
 .bar{
   height: 10px;
   background-color: lightblue;
+  z-index: +2; 
 }
