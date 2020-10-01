@@ -16,8 +16,8 @@ module UsersHelper
     raw(html)
   end
 
-  def time_disp_
-  end
+  # def time_disp_
+  # end
   
   def schedule_lines_
     html = ''
