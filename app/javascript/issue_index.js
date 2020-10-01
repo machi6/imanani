@@ -80,6 +80,17 @@ window.addEventListener('load', function(){
     bar_id = tasks[i].id.replace('task', 'bar');
     document.getElementById(bar_id).setAttribute("style", `width: ${bar_width}px;`);
   }
+
+  //今の時間に飛ぶ
+  const pushNowButton = document.getElementById("now");
+  pushNowButton.addEventListener('click', function() {
+    const nowtime = new Date();
+    console.log(nowtime.getDay()*1440);
+    console.log(nowtime.getHours()*60);
+    console.log(nowtime.getMinutes());
+    scrollTo(nowtime.getDay()*1440 + nowtime.getHours()*60, window.pageYOffset);
+    console.log(window.pageYOffset);
+  })
 })
 
 

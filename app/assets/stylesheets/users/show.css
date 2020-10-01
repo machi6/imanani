@@ -18,6 +18,13 @@ body {
   z-index: +3;
 }
 
+.now{
+  background-color:whitesmoke;
+  padding: 5px;
+  margin-left: 60px;
+  border: solid 1px gray;
+}
+
 .product{
   padding:5px;
   margin: 5px;

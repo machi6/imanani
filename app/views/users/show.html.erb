@@ -6,6 +6,7 @@
     <%= form_with url: user_path, method: :get, local: true do |f| %>
       <%= f.date_field :date %>へ
       <%= f.submit 'Go' %>
+      <span class = "now" id = "now">Now</span>
     <% end %>
     <br>
     <% back_message = '戻る' %>
