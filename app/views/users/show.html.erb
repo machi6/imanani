@@ -1,6 +1,10 @@
 <div class = "all_wrapper">
   <div class = "side" id = "side">
     <%= @user.nickname %>さん<%= '(あなた)' if @user.id == current_user.id %>のスケジュール
+    <%= form_with url: user_path, method: :get, local: true do |f| %>
+      <%= f.date_field :date %>へ
+      <%= f.submit 'Go' %>
+    <% end %>
     <br>
     <% back_message = '戻る' %>
     <% if @user.id == current_user.id %>
