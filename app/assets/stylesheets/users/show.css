@@ -38,6 +38,10 @@ body {
   border-bottom: solid 1px gray;
 }
 
+.issue-text{
+  width: 500px;
+}
+
 .main{
   padding:5px;
   margin: 5px;
