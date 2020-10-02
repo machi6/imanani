@@ -4,7 +4,7 @@
   <br>
   いつから始める？<%= f.datetime_select :start %>
   <br>
-  どのくらいかかる？<%= f.time_select :time %>
+  どのくらいかかる？<%= f.time_select :time, {:minute_step => 5} %>
   <br>
   <%= f.submit "変更する" %>
 <% end %>
