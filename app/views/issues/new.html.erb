@@ -1,6 +1,10 @@
 <h1>here is issue's new</h1>
 <%= form_with model: @issue, url: user_product_issues_path, method: :post, local: true do |f| %>
-  課題を簡潔に入力してください：<%= f.text_field :summary %>
+  表題：<%= f.text_field :summary %>
+<br>
+<%= f.text_area :description, class: "issue-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
+<br>
 <%= f.submit "新規作成する" %>
-<%=link_to 'もどる', user_path(@user.id) %>
 <% end %>
+<br><br>
+<%=link_to 'もどる', user_path(@user.id) %>

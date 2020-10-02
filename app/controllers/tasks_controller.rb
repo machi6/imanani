@@ -11,8 +11,8 @@ class TasksController < ApplicationController
     @product = Product.find(params[:product_id])
     @user = User.find(params[:user_id])
     if @task.valid?
-      shift_task
       @task.save
+      shift_task(@task.id)
       redirect_to user_path(params[:user_id])
     else
       @task = Task.new(task_params)
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
     @user = User.find(params[:user_id])
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      shift_task
+      shift_task(@task.id)
       redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
@@ -71,13 +71,11 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :start, :time).merge(issue_id: params[:issue_id])
   end
 
-  def shift_task
+  def shift_task(insert_task_id)
     #この処理、テーブルの結合でうまくできないのか？----------------------------------------------------------
     #担当部品のidを全て取得
     all_products_id = Array.new
-    # Product.all.each do |product|
     all_products_id << Product.where(user_id: current_user.id).ids
-    # end
     
     #担当部品が抱える課題のidを全て取得
     all_issues_id = Array.new
@@ -89,6 +87,7 @@ class TasksController < ApplicationController
     all_issues_id.each do |issue_id|
       all_tasks_id.concat(Task.where(issue_id: issue_id).ids)
     end
+    all_tasks_id.delete(insert_task_id)
     #自分の全てのタスクを取得
     ordered_tasks = Task.where(id: all_tasks_id).order(start: "ASC")
     #-------------------------------------------------------------------------------------------------
