@@ -33,6 +33,10 @@ class IssuesController < ApplicationController
       @user = User.find(params[:user_id])
       render :edit
     end
+    if params[:issue][:del_image] == '1'
+      #@issue.image.idで画像idを得られる
+      @issue.image.purge
+    end
   end
   def destroy
     issue = Issue.find(params[:id])
