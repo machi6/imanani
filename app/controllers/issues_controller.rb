@@ -49,6 +49,6 @@ class IssuesController < ApplicationController
 
   private
   def issue_params
-    params.require(:issue).permit(:summary, :description).merge(product_id: params[:product_id])
+    params.require(:issue).permit(:summary, :description, :image).merge(product_id: params[:product_id])
   end
 end
