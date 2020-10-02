@@ -7,6 +7,8 @@
 <%= f.submit "更新する" %>
 <% end %>
 <br>
+<%= image_tag @issue.image.variant(resize:'600x600') if @issue.image.attached? %>
+<br>
 <br>
 <%=link_to 'もどる', user_path(@user.id) %>
 <br>
