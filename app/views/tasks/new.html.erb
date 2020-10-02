@@ -2,9 +2,9 @@
 <%= form_with model: @task , url: user_product_issue_tasks_path, method: :post, local: true do |f| %>
   やる事：<%= f.text_field :title %>
   <br>
-  いつから始める？<%= f.datetime_select :start %>
+  いつから始める？<%= f.datetime_select :start, {default: Time.now}  %>
   <br>
-  どのくらいかかる？<%= f.time_select :time %>
+  どのくらいかかる？<%= f.time_select :time,  {default: Time.local(2000,1,1,0,0,0) , :minute_step => 5} %>
   <br>
 <%= f.submit "新規作成する" %>
 <br>
