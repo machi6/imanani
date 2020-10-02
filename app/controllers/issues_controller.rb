@@ -33,6 +33,10 @@ class IssuesController < ApplicationController
       @user = User.find(params[:user_id])
       render :edit
     end
+    if params[:issue][:del_image] == '1'
+      #@issue.image.idで画像idを得られる
+      @issue.image.purge
+    end
   end
   def destroy
     issue = Issue.find(params[:id])
@@ -49,6 +53,6 @@ class IssuesController < ApplicationController
 
   private
   def issue_params
-    params.require(:issue).permit(:summary, :description).merge(product_id: params[:product_id])
+    params.require(:issue).permit(:summary, :description, :image).merge(product_id: params[:product_id])
   end
 end

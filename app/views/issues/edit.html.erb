@@ -3,9 +3,19 @@
   表題：<%= f.text_field :summary, value:@issue.summary %>
 <br>
 <%= f.text_area :description, class: "issue-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
+画像を追加
+<%= f.file_field :image, id:"item-image" %>
 <br>
+<br>
+<% if @issue.image.attached? %> 
+  <%= f.check_box :del_image %>
+  画像を削除する
+  <br>
+<% end %>
 <%= f.submit "更新する" %>
 <% end %>
+<br>
+<%= image_tag @issue.image.variant(resize:'600x600') if @issue.image.attached? %>
 <br>
 <br>
 <%=link_to 'もどる', user_path(@user.id) %>
