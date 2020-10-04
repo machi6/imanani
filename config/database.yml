@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: imanani_production
-  username: imanani
-  password: <%= ENV['IMANANI_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
