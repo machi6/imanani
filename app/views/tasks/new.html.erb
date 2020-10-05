@@ -6,6 +6,9 @@
   <br>
   どのくらいかかる？<%= f.time_select :time,  {default: Time.local(2000,1,1,0,0,0) , :minute_step => 5} %>
   <br>
+  説明
+  <%= f.text_area :content, class: "task-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
+  <br>
 <%= f.submit "新規作成する" %>
 <br>
 <%=link_to 'もどる', user_path(@user.id) %>
