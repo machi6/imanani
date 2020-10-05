@@ -68,7 +68,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :start, :time).merge(issue_id: params[:issue_id])
+    params.require(:task).permit(:title, :start, :time, :content).merge(issue_id: params[:issue_id])
   end
 
   def shift_task(insert_task_id)

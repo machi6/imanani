@@ -42,6 +42,10 @@ body {
   width: 500px;
 }
 
+.task-text{
+  width: 500px;
+}
+
 .main{
   padding:5px;
   margin: 5px;
