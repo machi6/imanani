@@ -92,7 +92,7 @@ class TasksController < ApplicationController
     deployed_task_start = Task.find(id).start
     get_own_tasks.each do |task|
       if task.start < deployed_task_start && deployed_task_start < get_end_time(task)
-        difference = deployed_task_start - task.start
+        difference = get_end_time(task) - deployed_task_start
         task.update(time: task.time - difference)
       end
     end
