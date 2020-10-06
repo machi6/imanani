@@ -13,6 +13,7 @@ class TasksController < ApplicationController
     if @task.valid?
       @task.save
       shift_task([@task.id])
+      cut_time(@task.id)
       redirect_to user_path(params[:user_id])
     else
       @task = Task.new(task_params)
@@ -35,6 +36,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.update(task_params)
       shift_task([@task.id])
+      cut_time(@task.id)
       redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
@@ -72,13 +74,26 @@ class TasksController < ApplicationController
   end
 
   def shift_task(ids)
+    #開始時間が重複したタスクは時間をシフトする
     wrapped_task_ids = get_ids_in_time_range(ids)
     if wrapped_task_ids.length > 0
       difference = get_latest_end_time(ids) - get_fastest_start_time(wrapped_task_ids)
       wrapped_task_ids.each do |id|
         task = Task.find(id)
         task.update(start: task.start + difference)
+        #移動した先で開始時間が重複したタスクはそれも時間をシフトする
         shift_task(wrapped_task_ids)
+      end
+    end
+  end
+
+  def cut_time(id)
+    #タスクの終了時間が重複したものは時間をカットする
+    deployed_task_start = Task.find(id).start
+    get_own_tasks.each do |task|
+      if task.start < deployed_task_start && deployed_task_start < get_end_time(task)
+        difference = deployed_task_start - task.start
+        task.update(time: task.time - difference)
       end
     end
   end
@@ -87,7 +102,7 @@ class TasksController < ApplicationController
     fastest = get_fastest_start_time(ids)
     latest = get_latest_end_time(ids)
     ids_in_range = Array.new
-    Task.all.each do |task|
+    get_own_tasks.each do |task|
       if fastest <= task.start && task.start < latest
         ids_in_range << task.id
       end
@@ -120,4 +135,24 @@ class TasksController < ApplicationController
     end
     return latest
   end
+
+  def get_own_tasks
+    #担当部品のidを全て取得
+    all_products_id = Array.new
+    all_products_id << Product.where(user_id: current_user.id).ids
+    
+    #担当部品が抱える課題のidを全て取得
+    all_issues_id = Array.new
+    all_products_id.each do |product_id|
+      all_issues_id.concat(Issue.where(product_id: product_id).ids)
+    end
+    #全ての課題のidを取得
+    all_tasks_id = Array.new
+    all_issues_id.each do |issue_id|
+      all_tasks_id.concat(Task.where(issue_id: issue_id).ids)
+    end
+    #自分の全てのタスクを取得
+    ordered_tasks = Task.where(id: all_tasks_id).order(start: "ASC")
+  end
+
 end
