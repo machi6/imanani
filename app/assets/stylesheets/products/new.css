@@ -6,3 +6,13 @@
 .registration-product-title{
   font-size: 20px;
 }
+
+.product-name{
+  width: 380px;
+}
+
+.registration-product-bottom{
+  display: flex;
+  justify-content: space-between;
+  width: 530px;
+}
