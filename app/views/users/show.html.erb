@@ -9,9 +9,11 @@
       <span class = "now" id = "now">Now</span>
     <% end %>
     <br>
-    <% back_message = '戻る' %>
+    <% back_message = '登録者一覧へ戻る' %>
     <% if @user.id == current_user.id %>
       <% back_message = '自分以外のスケジュールを確認する' %>
+    <% else %>
+      <%= link_to 'マイページへ戻る', user_path(current_user.id) %><br>
     <% end %>
     <%= link_to back_message, users_path %>
 
@@ -27,10 +29,8 @@
     <%= tasks(@tasks) %>
     <div class = "day">
       <%= date_disp_ %>
-      <%# <%= time_disp_ %>
     </div>
     <%= schedule_lines_ %>
-    <%# <%= schedule_lines %>
   </div>
 </div>
 
