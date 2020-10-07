@@ -1,6 +1,9 @@
-<h1>Products#new</h1>
-<%= form_with model: @product, url: user_products_path, method: :post, local: true do |f| %>
-  部品名：<%= f.text_field :name , placeholder:"例）CTR PLR"%>
-<%= f.submit "新規作成する" %>
-<%=link_to 'もどる', user_path(@user.id) %>
-<% end %>
+<div class = "registration-product-wrapper">
+  <div class = "registration-product-title">部品を登録</div>
+  <%= form_with model: @product, url: user_products_path, method: :post, local: true do |f| %>
+    部品名：<%= f.text_field :name , placeholder:"例）CTR PLR"%>
+  <%= f.submit "新規作成する" %>
+  <br>
+  <%=link_to 'もどる', user_path(@user.id) %>
+  <% end %>
+</div>
