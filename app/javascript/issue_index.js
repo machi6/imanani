@@ -17,12 +17,19 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
     
 
     //issueの縦幅の調整
+    //taskが何のissue_idに含まれているかissue_ids_from_tasksに取得。例えば
+    //0: "issue_21_32"
+    //1: "issue_20_29"
+    //2: "issue_20_29"
+    //3: "issue_20_30"
+    //4: "issue_20_40"
+    //なら、issue_20_29のhtml idに含まれたtaskは2つ、それ以外はtaskが1つずつissueに含まれる。
     let tasks_ = document.getElementsByClassName("task");
     let issue_ids_from_tasks = [];
     for (i = 0; i<tasks_.length; i++){
       issue_ids_from_tasks.push(convert_parent_issue_id(tasks_[i]));
     }
-
+    //全てのissueのhtmlをタスクを含む含まないにかかわらずissue_idsに取得。
     let issue_ids = [];
     let issues_ = document.getElementsByClassName("issue");
     for (i = 0; i < issues_.length; i++){
@@ -33,8 +40,10 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
       for(j = 0; j< issue_ids_from_tasks.length; j++){
         if(issue_ids[i] == issue_ids_from_tasks[j]){count += 1;}
       }
-      if(count > 3){
-        document.getElementById(issue_ids[i]).setAttribute("style", `height: ${(count + 1) * get_task_height()}px;`);
+      console.log(count);
+      let own_issue_height = document.getElementById(issue_ids[i]).clientHeight
+      if (own_issue_height < get_task_height() * count){
+        document.getElementById(issue_ids[i]).setAttribute("style", `height: ${count * get_task_height()}px;`);
       }
     }
 

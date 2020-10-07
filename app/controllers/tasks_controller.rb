@@ -12,7 +12,8 @@ class TasksController < ApplicationController
     @user = User.find(params[:user_id])
     if @task.valid?
       @task.save
-      shift_task(@task.id)
+      shift_task([@task.id])
+      cut_time(@task.id)
       redirect_to user_path(params[:user_id])
     else
       @task = Task.new(task_params)
@@ -34,7 +35,8 @@ class TasksController < ApplicationController
     @user = User.find(params[:user_id])
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      shift_task(@task.id)
+      shift_task([@task.id])
+      cut_time(@task.id)
       redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
@@ -71,8 +73,70 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :start, :time, :content).merge(issue_id: params[:issue_id])
   end
 
-  def shift_task(insert_task_id)
-    #この処理、テーブルの結合でうまくできないのか？----------------------------------------------------------
+  def shift_task(ids)
+    #開始時間が重複したタスクは時間をシフトする
+    wrapped_task_ids = get_ids_in_time_range(ids)
+    if wrapped_task_ids.length > 0
+      difference = get_latest_end_time(ids) - get_fastest_start_time(wrapped_task_ids)
+      wrapped_task_ids.each do |id|
+        task = Task.find(id)
+        task.update(start: task.start + difference)
+        #移動した先で開始時間が重複したタスクはそれも時間をシフトする
+        shift_task(wrapped_task_ids)
+      end
+    end
+  end
+
+  def cut_time(id)
+    #タスクの終了時間が重複したものは時間をカットする
+    deployed_task_start = Task.find(id).start
+    get_own_tasks.each do |task|
+      if task.start < deployed_task_start && deployed_task_start < get_end_time(task)
+        difference = get_end_time(task) - deployed_task_start
+        task.update(time: task.time - difference)
+      end
+    end
+  end
+
+  def get_ids_in_time_range(ids)
+    fastest = get_fastest_start_time(ids)
+    latest = get_latest_end_time(ids)
+    ids_in_range = Array.new
+    get_own_tasks.each do |task|
+      if fastest <= task.start && task.start < latest
+        ids_in_range << task.id
+      end
+    end
+    #自分は除く
+    ids.each do |id|
+      ids_in_range.delete(id)
+    end
+    return ids_in_range
+  end
+
+  def get_end_time(task)
+    task.start + task.time.hour * 3600 + task.time.min * 60 + task.time.sec
+  end
+
+  def get_fastest_start_time(ids)
+    fastest = Task.find(ids[0]).start
+    ids.each do |id|
+      task = Task.find(id)
+      fastest = task.start if task.start <= fastest
+    end
+    return fastest
+  end
+
+  def get_latest_end_time(ids)
+    latest = Task.find(ids[0]).start
+    ids.each do |id|
+      task = Task.find(id)
+      latest = get_end_time(task) if latest <= get_end_time(task)
+    end
+    return latest
+  end
+
+  def get_own_tasks
     #担当部品のidを全て取得
     all_products_id = Array.new
     all_products_id << Product.where(user_id: current_user.id).ids
@@ -87,26 +151,8 @@ class TasksController < ApplicationController
     all_issues_id.each do |issue_id|
       all_tasks_id.concat(Task.where(issue_id: issue_id).ids)
     end
-    all_tasks_id.delete(insert_task_id)
     #自分の全てのタスクを取得
     ordered_tasks = Task.where(id: all_tasks_id).order(start: "ASC")
-    #-------------------------------------------------------------------------------------------------
-    #新しいタスクが割り込みだったらそれ以降のタスクをシフトする
-    new_task_end = @task.start + @task.time.min * 60 + @task.time.hour * 3600
-    # new_task_man_hours = @task.time.min * 60 + @task.time.hour * 3600
-    difference = 0.0
-    changed = false
-    ordered_tasks.each do |task|
-      if changed == false
-        if @task.start <= task.start && task.start <= new_task_end
-          difference = new_task_end - task.start
-          task.update(start: task.start + difference)
-          changed = true
-          next
-        end
-      else
-        task.update(start: task.start + difference)
-      end
-    end
   end
+
 end
