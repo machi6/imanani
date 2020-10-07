@@ -1,0 +1,23 @@
+/* editとも共用 */
+.registration-task-wrapper{
+  background-color: whitesmoke;
+}
+
+.registration-task-width-adjuster{
+  width: 500px;
+}
+
+.registration-task-title{
+  font-size: 20px;
+}
+
+.registration-task-submit-wrapper{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.registration-task-bottom{
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}

@@ -40,7 +40,6 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
       for(j = 0; j< issue_ids_from_tasks.length; j++){
         if(issue_ids[i] == issue_ids_from_tasks[j]){count += 1;}
       }
-      console.log(count);
       let own_issue_height = document.getElementById(issue_ids[i]).clientHeight
       if (own_issue_height < get_task_height() * count){
         document.getElementById(issue_ids[i]).setAttribute("style", `height: ${count * get_task_height()}px;`);
@@ -60,7 +59,12 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
       time_disp.setAttribute("style", `left: ${i*60}px;`)
 
       let vertical_line = document.getElementById("vertical_line_" + String(i));
-      vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px;`);
+      if ( vertical_line.dataset.hour_time_zone < 7 || 22 <= vertical_line.dataset.hour_time_zone){
+        vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px; background-color: rgba( 50, 50, 50, 0.2 );`);
+      }else{
+        vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px;`);
+      }
+      
     }
 
     //タスクの位置を調整
@@ -100,11 +104,7 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
     const pushNowButton = document.getElementById("now");
     pushNowButton.addEventListener('click', function() {
       const nowtime = new Date();
-      console.log(nowtime.getDay()*1440);
-      console.log(nowtime.getHours()*60);
-      console.log(nowtime.getMinutes());
       scrollTo(nowtime.getDay()*1440 + nowtime.getHours()*60, window.pageYOffset);
-      console.log(window.pageYOffset);
     })
   })
 }

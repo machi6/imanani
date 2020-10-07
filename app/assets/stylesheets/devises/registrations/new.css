@@ -1,0 +1,41 @@
+.registrations-wrapper{
+  margin-top: 100px;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  background-color: whitesmoke;
+}
+
+.registrations-top-message{
+  font-size: 30px;
+}
+
+.registrations-name{
+  padding: 5px 0px;
+  width: 400px;
+}
+
+.registrations-email{
+  padding: 5px 0px;
+  width: 400px;
+}
+
+.registrations-password{
+  padding: 5px 0px;
+  width: 400px;
+}
+
+.registrations-password-confirmation{
+  padding: 5px 0px;
+  width: 400px;
+}
+
+.user-registration-btn{
+  padding: 5px;
+}
+
+.registrations-item{
+  margin-top: 15px;
+}

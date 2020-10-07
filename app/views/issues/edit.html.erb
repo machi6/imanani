@@ -1,24 +1,29 @@
-<h1>Issue#edit</h1>
-<%= form_with model: @issue, url: user_product_issue_path , method: :patch, local: true do |f| %>
-  表題：<%= f.text_field :summary, value:@issue.summary %>
-<br>
-<%= f.text_area :description, class: "issue-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
-画像を追加
-<%= f.file_field :image, id:"item-image" %>
-<br>
-<br>
-<% if @issue.image.attached? %> 
-  <%= f.check_box :del_image %>
-  画像を削除する
+<div class = "registration-issue-wrapper">
+  <div class = "registration-issue-title" ><b>課題を編集</b></div>
+  <%= form_with model: @issue, url: user_product_issue_path , method: :patch, local: true do |f| %>
+    表題：<%= f.text_field :summary, value:@issue.summary %>
   <br>
-<% end %>
-<%= f.submit "更新する" %>
-<% end %>
-<br>
-<%= image_tag @issue.image.variant(resize:'600x600') if @issue.image.attached? %>
-<br>
-<br>
-<%=link_to 'もどる', user_path(@user.id) %>
-<br>
-<br>
-<%= link_to 'この課題を削除する', user_product_issue_path(@user.id, @product.id, @issue.id), method: :delete %>
+  <%= f.text_area :description, class: "issue-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
+  <br>
+  画像を追加:
+  <br>
+  <%= f.file_field :image, id:"item-image" %>
+  <div class = "registration-issue-bottom">
+    <div>
+      <% if @issue.image.attached? %> 
+        <%= f.check_box :del_image %>
+        選択中もしくは設定中の画像を削除する
+        <br>
+      <% end %>
+    </div>
+      <div><%= f.submit "更新する" %></div>
+  </div>
+  <% end %>
+  <br>
+  <br>
+    <div class = "registration-issue-bottom">
+      <div><%=link_to 'もどる', user_path(@user.id) %></div>
+      <div><%= link_to 'この課題を削除する', user_product_issue_path(@user.id, @product.id, @issue.id), method: :delete %></div>
+    </div>
+  <%= image_tag @issue.image.variant(resize:'600x600') if @issue.image.attached? %>
+</div>

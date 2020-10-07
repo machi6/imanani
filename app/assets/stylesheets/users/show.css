@@ -15,17 +15,26 @@
 }
 
 .now{
-  background-color:whitesmoke;
+  background-color: whitesmoke;
   padding: 5px;
-  margin-left: 60px;
+  margin-top: 5px;
+  display: inline-block;
+  /* margin-left: 60px; */
   border: solid 1px gray;
 }
 
 .product{
   padding:5px;
   margin: 5px;
-  /* position: absolute; */
   border: solid 2px gray;
+  display: flex;
+  justify-content: space-between;
+}
+
+.add_issue{
+  border: solid 1px gray;
+  padding: 3px;
+  background-color:pink;
 }
 
 .issue{
@@ -34,8 +43,24 @@
   border-bottom: solid 1px gray;
 }
 
-.issue-text{
-  width: 500px;
+.issue-commands-wrapper{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.issue-commands{
+  display: flex;
+  flex-direction: column;
+}
+
+.issue-command-edit{
+  border: solid 1px gray;
+  background-color:pink;
+}
+
+.issue-command-add-task{
+  border: solid 1px gray;
+  background-color: lightgoldenrodyellow;
 }
 
 .task-text{
@@ -59,7 +84,7 @@
   position: absolute;
   top: 0px;
   font-size: 12px;
-  background-color: white;
+  background-color: transparent;
   width: 150px;
   z-index: +2; 
 }
@@ -68,24 +93,23 @@
   position: absolute;
   top: 15px;
   font-size: 14px;
-  background-color: white;
+  background-color: transparent;
   z-index: +2; 
 }
 
 .vertical_line{
   height: 200px;
   position: absolute;
-  width: 10px;
-  /* height: 500px; */
+  width: 60px;
   top: 0px;
-  /* left : 360px; */
   border-left: solid 1px gray;
-  z-index: +1; 
+  z-index: -1;
 }
 
 .task{
   position: absolute;
   white-space: nowrap;
+  z-index: +1;
 }
 
 .bar{

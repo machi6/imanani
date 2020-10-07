@@ -1,4 +1,10 @@
 <div class = "product" id = <%= "product_#{product.id}"%>>
-  <%= link_to product.name, edit_user_product_path(product.user_id, product.id) %>
-  ：<%= link_to '課題を新規登録する', new_user_product_issue_path(product.user_id, product.id) %>
+  <div><%= link_to product.name, edit_user_product_path(product.user_id, product.id) %></div>
+  <div>
+    <label class="form-image">
+      <div>
+        <%= link_to '課題を追加↓', new_user_product_issue_path(product.user_id, product.id), class: "add_issue" %>
+      </div>
+    </label>
+  </div>
 </div>
