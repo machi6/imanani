@@ -1,16 +1,27 @@
-<h1>Tasks#edit</h1>
-<%= form_with model: @task , url: user_product_issue_task_path, method: :patch, local: true do |f| %>
-  やる事：<%= f.text_field :title %>
-  <br>
-  いつから始める？<%= f.datetime_select :start %>
-  <br>
-  どのくらいかかる？<%= f.time_select :time, {:minute_step => 5} %>
-  <br>
-  <%= f.text_area :content, class: "task-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
-  <br>
-  <%= f.submit "変更する" %>
-<% end %>
-<%=link_to 'もどる', user_path(@user.id) %>
-<br>
-<br>
-<%= link_to 'このタスクを削除する', user_product_issue_task_path, method: :delete %>
+<div class = "registration-task-wrapper">
+  <div class = "registration-task-width-adjuster">
+    <div class = "registration-task-title" ><b>やる事を編集</b></div>
+    <%= form_with model: @task , url: user_product_issue_task_path, method: :patch, local: true do |f| %>
+      やる事：<%= f.text_field :title %>
+      <br>
+      いつから始める？<%= f.datetime_select :start %>
+      <br>
+      どのくらいかかる？<%= f.time_select :time, {:minute_step => 5} %>
+      <br>
+      <%= f.text_area :content, class: "task-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
+      <br>
+      <div class = "registration-task-submit-wrapper">
+        <%= f.submit "変更する" %>
+      </div>
+    <% end %>
+    <br>
+    <div class = "registration-issue-bottom">
+      <div>
+      <%= link_to 'もどる', user_path(@user.id) %>
+      </div>
+      <div>
+      <%= link_to 'このタスクを削除する', user_product_issue_task_path, method: :delete %>
+      </div>
+    </div>
+  </div>
+</div>

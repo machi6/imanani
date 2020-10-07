@@ -1,15 +1,19 @@
-<h1>Tasks#new</h1>
-<%= form_with model: @task , url: user_product_issue_tasks_path, method: :post, local: true do |f| %>
-  やる事：<%= f.text_field :title %>
-  <br>
-  いつから始める？<%= f.datetime_select :start, {default: Time.current}  %>
-  <br>
-  どのくらいかかる？<%= f.time_select :time,  {default: Time.local(2000,1,1,0,0,0) , :minute_step => 5} %>
-  <br>
-  説明
-  <%= f.text_area :content, class: "task-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
-  <br>
-<%= f.submit "新規作成する" %>
-<br>
-<%=link_to 'もどる', user_path(@user.id) %>
-<% end %>
+<div class = "registration-task-wrapper">
+  <div class = "registration-task-width-adjuster">
+    <div class = "registration-task-title" ><b>やる事を追加</b></div>
+    <%= form_with model: @task , url: user_product_issue_tasks_path, method: :post, local: true do |f| %>
+      やる事：<%= f.text_field :title %>
+      <br>
+      いつから始める？<%= f.datetime_select :start, {default: Time.current}  %>
+      <br>
+      どのくらいかかる？<%= f.time_select :time,  {default: Time.local(2000,1,1,0,0,0) , :minute_step => 5} %>
+      <br>
+      <%= f.text_area :content, class: "task-text", placeholder:"課題の詳細説明（ 1,000文字まで）" ,rows:"5" ,maxlength:"1000" %>
+      <br>
+      <div class = "registration-task-submit-wrapper">
+        <%= f.submit "新規作成する" %>
+      </div>
+    <%=link_to 'もどる', user_path(@user.id) %>
+    <% end %>
+  <div>
+</div>
