@@ -1,12 +1,13 @@
 <div class = "all_wrapper">
   <div class = "side" id = "side">
-    <%= @user.nickname %>さん<%= '(あなた)' if @user.id == current_user.id %>のスケジュール
+    <b><%= @user.nickname %>さん<%= '(あなた)' if @user.id == current_user.id %>のスケジュール</b>
     <br>
     (<%= @week_start_day%> 〜 <%= @week_start_day + 7%>)
     <%= form_with url: user_path, method: :get, local: true do |f| %>
       <%= f.date_field :date %>へ
       <%= f.submit 'Go' %>
-      <span class = "now" id = "now">Now</span>
+      <br>
+      <div class = "now" id = "now">現在時刻へジャンプ</div>
     <% end %>
     <br>
     <% back_message = '登録者一覧へ戻る' %>
