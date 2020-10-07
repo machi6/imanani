@@ -59,7 +59,12 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
       time_disp.setAttribute("style", `left: ${i*60}px;`)
 
       let vertical_line = document.getElementById("vertical_line_" + String(i));
-      vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px;`);
+      if ( vertical_line.dataset.hour_time_zone < 7 || 22 <= vertical_line.dataset.hour_time_zone){
+        vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px; background-color: rgba( 50, 50, 50, 0.2 );`);
+      }else{
+        vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px;`);
+      }
+      
     }
 
     //タスクの位置を調整

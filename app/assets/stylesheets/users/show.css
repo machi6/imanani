@@ -84,7 +84,7 @@
   position: absolute;
   top: 0px;
   font-size: 12px;
-  background-color: white;
+  background-color: transparent;
   width: 150px;
   z-index: +2; 
 }
@@ -93,7 +93,7 @@
   position: absolute;
   top: 15px;
   font-size: 14px;
-  background-color: white;
+  background-color: transparent;
   z-index: +2; 
 }
 
@@ -103,6 +103,7 @@
   width: 60px;
   top: 0px;
   border-left: solid 1px gray;
+  z-index: -1;
 }
 
 .task{
