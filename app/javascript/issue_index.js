@@ -40,7 +40,6 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
       for(j = 0; j< issue_ids_from_tasks.length; j++){
         if(issue_ids[i] == issue_ids_from_tasks[j]){count += 1;}
       }
-      console.log(count);
       let own_issue_height = document.getElementById(issue_ids[i]).clientHeight
       if (own_issue_height < get_task_height() * count){
         document.getElementById(issue_ids[i]).setAttribute("style", `height: ${count * get_task_height()}px;`);
@@ -100,11 +99,7 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
     const pushNowButton = document.getElementById("now");
     pushNowButton.addEventListener('click', function() {
       const nowtime = new Date();
-      console.log(nowtime.getDay()*1440);
-      console.log(nowtime.getHours()*60);
-      console.log(nowtime.getMinutes());
       scrollTo(nowtime.getDay()*1440 + nowtime.getHours()*60, window.pageYOffset);
-      console.log(window.pageYOffset);
     })
   })
 }
