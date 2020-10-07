@@ -1,0 +1,27 @@
+/* editとも共用 */
+.registration-issue-wrapper{
+  background-color: whitesmoke;
+}
+
+.registration-issue-title{
+  font-size: 20px;
+}
+
+.issue-summary{
+  width: 380px;
+}
+
+.issue-text{
+  width: 800px;
+}
+
+.image-file-button{
+  border: solid 1px black;
+  padding: 5px;
+}
+
+.registration-issue-bottom{
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+}

@@ -1,5 +1,5 @@
 <div class = "registration-product-wrapper">
-  <div class = "registration-product-title">部品を登録</div>
+  <div class = "registration-product-title"><b>部品を登録</b></div>
   <%= form_with model: @product, url: user_products_path, method: :post, local: true do |f| %>
     部品名：<%= f.text_field :name , placeholder:"例）CTR PLR"%>
   <%= f.submit "新規作成する" %>
