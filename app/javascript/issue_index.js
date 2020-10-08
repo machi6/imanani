@@ -1,6 +1,5 @@
 if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) == null ){
-  window.addEventListener('load', (e) => {
-    e.preventDefault();//全部移動し切ってから描画したい
+  window.addEventListener('load', function(){
     //関数群
     function convert_parent_issue_id(task){
       return task.id.split('|')[0].replace('task', 'issue')
