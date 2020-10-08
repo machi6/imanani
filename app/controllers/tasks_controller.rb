@@ -14,6 +14,7 @@ class TasksController < ApplicationController
       @task.save
       shift_task([@task.id])
       cut_time(@task.id)
+      avoid_not_working_hours
       redirect_to user_path(params[:user_id])
     else
       @task = Task.new(task_params)
@@ -37,6 +38,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       shift_task([@task.id])
       cut_time(@task.id)
+      avoid_not_working_hours
       redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
@@ -98,6 +100,40 @@ class TasksController < ApplicationController
     end
   end
 
+  def avoid_not_working_hours
+    #勤務時間外に開始時間が来たタスクを翌日にする
+    get_own_tasks.each do |task|
+      if 22 <= task.start.hour || task.start.hour < 7 
+        shift_to_working_hours_id_later(task.id)
+      end
+    end
+  end
+
+  def shift_to_working_hours_id_later(id)
+    #どのくらいずらすのか計算する
+    start_hour = Task.find(id).start.hour
+    shift_hour = 0
+    #開始時間が22:00~0:00の間なら
+    if 22 <= start_hour
+      shift_hour = 24 - start_hour + 7
+    #開始時間が00:00~7:00の間なら
+    elsif start_hour <= 7
+      shift_hour = 7 - start_hour
+    end
+    flag = false;
+    ids = Array.new
+    #id以降に開始するタスクのidを取得する
+    get_own_tasks.each do |task|
+      flag = true if id == task.id
+      ids << task.id if flag == true
+    end
+    #時間の移動が必要なものを一括でずらす
+    ordered_tasks = Task.where(id: ids).order(start: "ASC")
+    ordered_tasks.each do |task|
+      task.update(start: task.start + shift_hour * 3600)
+    end
+  end
+
   def get_ids_in_time_range(ids)
     fastest = get_fastest_start_time(ids)
     latest = get_latest_end_time(ids)
@@ -151,7 +187,7 @@ class TasksController < ApplicationController
     all_issues_id.each do |issue_id|
       all_tasks_id.concat(Task.where(issue_id: issue_id).ids)
     end
-    #自分の全てのタスクを取得
+    #自分の全てのタスクを日付順に取得
     ordered_tasks = Task.where(id: all_tasks_id).order(start: "ASC")
   end
 
