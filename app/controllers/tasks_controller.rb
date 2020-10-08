@@ -14,6 +14,7 @@ class TasksController < ApplicationController
       @task.save
       shift_task([@task.id])
       cut_time(@task.id)
+      avoid_not_working_hour
       redirect_to user_path(params[:user_id])
     else
       @task = Task.new(task_params)
@@ -37,6 +38,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       shift_task([@task.id])
       cut_time(@task.id)
+      avoid_not_working_hour
       redirect_to user_path(params[:user_id])
     else
       @product = Product.find(params[:product_id])
@@ -97,6 +99,49 @@ class TasksController < ApplicationController
         task.update(time: task.time - difference)
       end
     end
+  end
+
+  def avoid_not_working_hour
+    #時系列順に調べて、一番古いタスクで勤務時間外のタスクを1つ取得
+    oldest_id = -1
+    get_own_tasks.each do |task|
+      if 22 <= task.start.hour || task.start.hour < 7
+        oldest_id = task.id
+        break
+      end
+    end
+    return if oldest_id == -1
+    target_not_working_hour_start = Time.local(2000, 1, 1, 0, 0, 0)
+    target_not_working_hour_end = Time.local(2000, 1, 1, 0, 0, 0)
+    oldest_task = Task.find(oldest_id)
+    #一番古い時間外のタスクが存在する勤務時間外の時間帯を取得
+    if oldest_task.start.hour >= 22
+      target_not_working_hour_start = Time.local(oldest_task.start.year, oldest_task.start.mon, oldest_task.start.day, 22, 0, 0)
+      target_not_working_hour_end = Time.local(oldest_task.start.year, oldest_task.start.mon, oldest_task.start.day + 1, 7, 0, 0)
+    else
+      target_not_working_hour_start = Time.local(oldest_task.start.year, oldest_task.start.mon, oldest_task.start.day - 1, 22, 0, 0)
+      target_not_working_hour_end = Time.local(oldest_task.start.year, oldest_task.start.mon, oldest_task.start.day, 7, 0, 0)
+    end
+    #一番古い時間外のタスクが存在する勤務時間外の時間帯に開始時間があるタスクを全て取得
+    tasks_on_not_working_hour = Array.new
+    get_own_tasks.each do |task|
+      if target_not_working_hour_start <= task.start && task.start < target_not_working_hour_end
+        tasks_on_not_working_hour << task
+      end
+    end
+    #取得したタスクを全て翌日7時に連なるように移動
+    shifted_task_time_sum = 0
+    tasks_on_not_working_hour.each do |task|
+      task.update(start: target_not_working_hour_end + shifted_task_time_sum)
+      shifted_task_time_sum += task.time.hour * 3600 + task.time.min * 60 + task.time.sec
+    end
+    #移動した先で重複があったらそのタスクは移動させる
+    tasks_on_not_working_hour_ids = Array.new
+    tasks_on_not_working_hour.each do |task|
+      tasks_on_not_working_hour_ids << task.id
+    end
+    shift_task(tasks_on_not_working_hour_ids)
+    avoid_not_working_hour
   end
 
   def get_ids_in_time_range(ids)
