@@ -110,10 +110,14 @@
   position: absolute;
   white-space: nowrap;
   z-index: +1;
+  /* javascriptで可視化します */
+  visibility: hidden;
 }
 
 .bar{
   height: 10px;
   background-color: lightblue;
   z-index: +2; 
+  /* javascriptで可視化します */
+  visibility: hidden;
 }
