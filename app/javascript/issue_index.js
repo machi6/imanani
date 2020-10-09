@@ -90,14 +90,16 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
       let start_time_M = Number(start[1]);//15:30開始なら30
       let start_time_wday = Number(tasks[i].dataset.wday);
       let start_pos = (start_time_H * 60) + (start_time_M) + (start_time_wday * 1440);
-      document.getElementById(tasks[i].id).setAttribute("style", `top: ${task_top}px; left: ${start_pos}px;`);
+      //位置の移動が終わるまで左上に要素が集まって表示されて見栄えが悪い為、移動が済んでから描画する。
+      document.getElementById(tasks[i].id).setAttribute("style", `top: ${task_top}px; left: ${start_pos}px; visibility: visible;`);
       
       time = tasks[i].dataset.time.split(':');
       let time_H = Number(time[0]);
       let time_M = Number(time[1]);
       let bar_width = time_H * 60 + time_M;
       bar_id = tasks[i].id.replace('task', 'bar');
-      document.getElementById(bar_id).setAttribute("style", `width: ${bar_width}px;`);
+      //位置の移動が終わるまで左上に要素が集まって表示されて見栄えが悪い為、移動が済んでから描画する。
+      document.getElementById(bar_id).setAttribute("style", `width: ${bar_width}px; visibility: visible;`);
     }
 
     //今の時間に飛ぶ
