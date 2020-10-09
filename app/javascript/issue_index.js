@@ -52,17 +52,19 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
     for(i = 0; i<168; i++){
       if (i % 24 == 0){
         let date_disp = document.getElementById("date_disp_" + String(ite_date));
-        date_disp.setAttribute("style", `left: ${ite_date*1440}px;`)
+        //位置の移動が終わるまで左上に要素が集まって表示されて見栄えが悪い為、移動が済んでから描画する。
+        date_disp.setAttribute("style", `left: ${ite_date*1440}px; visibility: visible;`)
         ite_date += 1;
         }
       let time_disp = document.getElementById("time_disp_" + String(i));
-      time_disp.setAttribute("style", `left: ${i*60}px;`)
+      time_disp.setAttribute("style", `left: ${i*60}px; visibility: visible;`)
 
       let vertical_line = document.getElementById("vertical_line_" + String(i));
+      //位置の移動が終わるまで左上に要素が集まって表示されて見栄えが悪い為、移動が済んでから描画する。
       if ( vertical_line.dataset.hour_time_zone < 7 || 22 <= vertical_line.dataset.hour_time_zone){
-        vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px; background-color: rgba( 50, 50, 50, 0.2 );`);
+        vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px; background-color: rgba( 50, 50, 50, 0.2 ); visibility: visible;`);
       }else{
-        vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px;`);
+        vertical_line.setAttribute("style", `left: ${i*60}px; height: ${vertical_line_height}px; visibility: visible;`);
       }
       
     }
