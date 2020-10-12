@@ -15,13 +15,11 @@
 担当部品を１〜複数個持ち、中長期（半年〜2年程度）の製品開発プロジェクトに携わる方。<br>
 
 ### 開発環境
-ハードウェア
-mac book air （メモリ8GB）
-ソフトウェア
-Visual Studio Code
+ハードウェア...mac book air （メモリ8GB）,
+ソフトウェア...Visual Studio Code
 
 ### 使用技術
-HTML, CSS, Ruby on rails, Javascript, MySQL, Active Record, AWS S3,EC2
+HTML, CSS, Ruby on rails, Javascript, MySQL, Active Record, AWS S3及びEC2
 
 ### 推奨ブラウザ
 Google Chrome
