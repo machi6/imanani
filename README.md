@@ -1,6 +1,7 @@
 # このアプリケーションについて
 ### 概要
 このアプリケーションは、製品設計者向け課題潰し込みスケジュールツールです。<br>
+業務効率を向上し、より働きやすい環境を実現することを目的に作られました。<br>
 ブラウザ上で動作するWebアプリケーションです。<br>
 名前を「imanani(イマナニ)」といいます。<br>
 
@@ -19,7 +20,7 @@
 ソフトウェア...Visual Studio Code
 
 ### 使用技術
-HTML, CSS, Ruby on rails, Javascript, MySQL, Active Record, AWS S3及びEC2
+HTML, CSS, Ruby on rails, Javascript, MySQL, Devise, Active Record, AWS S3及びEC2
 
 ### 推奨ブラウザ
 Google Chrome
