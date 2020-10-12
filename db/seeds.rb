@@ -9,6 +9,13 @@
 User.create(nickname: "新人 太朗", email: "shinjintaro@shinjintaro", password: "shinjintaro0")     #id...1
 User.create(nickname: "同期 次郎", email: "doukijiro@doukijiro", password: "doukijiro0")           #id...2
 User.create(nickname: "上司 三郎", email: "joushisaburo@joushisaburo", password: "joushisaburo0")  #id...3
+User.create(nickname: "山田 四郎", email: "yamadashiro@yamadashiro", password: "yamadashiro0")     #id...4
+User.create(nickname: "鈴木 吾郎", email: "suzukigoro@suzukigoro", password: "suzukigoro0")           #id...5
+User.create(nickname: "高橋 六郎", email: "takahashirokuro@takahashirokuro", password: "takahashirokuro0")  #id...6
+User.create(nickname: "斎藤 七郎", email: "saitonanaro@saitonanaro", password: "saitonanaro0")     #id...7
+User.create(nickname: "田中 八郎", email: "tanakahachiro@tanakahachiro", password: "tanakahachiro0")           #id...8
+User.create(nickname: "藤原 九郎", email: "fujiwarakuro@fujiwarakuro", password: "fujiwarakuro0")  #id...9
+User.create(nickname: "小林 十郎", email: "kobayashijuro@kobayashijuro", password: "kobayashijuro0")     #id...10
 
 #新人太郎君の担当部品
 Product.create(user_id: 1, name: "FRONT BEAM")                                                         #id...1
