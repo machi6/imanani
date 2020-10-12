@@ -25,9 +25,15 @@ HTML, CSS, Ruby on rails, Javascript, MySQL, Active Record, AWS S3及びEC2
 Google Chrome
 
 # 使用画面
+ログイン画面
 ![ログイン画面](https://user-images.githubusercontent.com/70276196/95711896-ab1b6f00-0c9e-11eb-80bd-bcb95841d1c5.jpg)
+スケジュール画面
 ![スケジュール画面](https://user-images.githubusercontent.com/70276196/95713880-42ce8c80-0ca2-11eb-8cec-7fd246b781fa.jpg)
+課題編集画面
 ![課題編集画面](https://user-images.githubusercontent.com/70276196/95714340-0bacab00-0ca3-11eb-95c5-e5be87339417.jpg)
+チームメンバー 一覧画面
+![チームメンバー一覧画面](https://user-images.githubusercontent.com/70276196/95717879-980d9c80-0ca8-11eb-948b-3f2b41b8c7aa.jpg)
+
 # こんな問題を解決します
 
 # 実装と処理の詳細
