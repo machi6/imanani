@@ -21,7 +21,7 @@ mac book air （メモリ8GB）
 Visual Studio Code
 
 ### 使用技術
-HTML, CSS, Ruby on rails, Javascript, MySQL, Active Record
+HTML, CSS, Ruby on rails, Javascript, MySQL, Active Record, AWS S3,EC2
 
 ### 推奨ブラウザ
 Google Chrome
