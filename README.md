@@ -28,7 +28,8 @@ Google Chrome
 
 # 使用画面
 ![ログイン画面](https://user-images.githubusercontent.com/70276196/95711896-ab1b6f00-0c9e-11eb-80bd-bcb95841d1c5.jpg)
-
+![スケジュール画面](https://user-images.githubusercontent.com/70276196/95713880-42ce8c80-0ca2-11eb-8cec-7fd246b781fa.jpg)
+![課題編集画面](https://user-images.githubusercontent.com/70276196/95714340-0bacab00-0ca3-11eb-95c5-e5be87339417.jpg)
 # こんな問題を解決します
 
 # 実装と処理の詳細
