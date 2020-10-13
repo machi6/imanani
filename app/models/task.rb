@@ -4,5 +4,6 @@ class Task < ApplicationRecord
     validates :title, presence: true
     validates :start, presence: true
     validates :time, presence: true
+    #validates :time_fixed, presence: true
   end
 end
