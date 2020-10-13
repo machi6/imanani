@@ -29,7 +29,7 @@ Google Chrome
 ログイン画面
 ![ログイン画面](https://user-images.githubusercontent.com/70276196/95720153-d0fb4080-0cab-11eb-9c45-2af8cbf7e278.jpg)
 スケジュール画面
-![スケジュール画面](https://user-images.githubusercontent.com/70276196/95713880-42ce8c80-0ca2-11eb-8cec-7fd246b781fa.jpg)
+![スケジュール画面](https://user-images.githubusercontent.com/70276196/95834724-4896a180-0d78-11eb-97c3-eb98f87d0cad.jpg)
 課題編集画面
 ![課題編集画面](https://user-images.githubusercontent.com/70276196/95714340-0bacab00-0ca3-11eb-95c5-e5be87339417.jpg)
 チームメンバー 一覧画面
