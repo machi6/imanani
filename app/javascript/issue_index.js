@@ -45,6 +45,26 @@ if (document.URL.match( /users\/\d{1,}/ ) && document.URL.match( /products/ ) ==
         document.getElementById(issue_ids[i]).setAttribute("style", `height: ${count * get_task_height()}px;`);
       }
     }
+    //issueごとの区切り線を表示(下側)
+    for (i = 0; i < issue_ids.length; i++){
+      issue = document.getElementById(issue_ids[i]);
+      const horizon_lwr = document.createElement('div');
+      horizon_lwr.setAttribute("style", `width: 10075px; border-top: dashed 1px black; position: absolute; top: ${issue.offsetTop + issue.clientHeight - 5 }px;`);
+      document.getElementById('main').appendChild(horizon_lwr);
+    }
+    //issueごとの区切り線を表示（上側）
+    let product_ids = [];
+    let products_ = document.getElementsByClassName("product");
+    for (i = 0; i < products_.length; i++){
+      product_ids.push(products_[i].id);
+    }
+    for (i = 0; i < product_ids.length; i++){
+      product = document.getElementById(product_ids[i]);
+      const horizon_upr = document.createElement('div');
+      horizon_upr.setAttribute("style", `width: 10075px; border-top: dashed 1px black; position: absolute; top: ${product.offsetTop + product.clientHeight }px;`);
+      document.getElementById('main').appendChild(horizon_upr);
+      console.log(product)
+    }
 
     //縦線の位置を設定
     let vertical_line_height = document.getElementById("main").clientHeight;
