@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_10_13_004725) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "time_fixed", default: false, null: false
+    t.boolean "time_fixed", default: false
     t.index ["issue_id"], name: "index_tasks_on_issue_id"
   end
 
