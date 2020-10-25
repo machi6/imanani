@@ -1,7 +1,7 @@
 <div class = "user-index-wrapper">
   <div class = "user-index-title" ><b>チームメンバー 一覧</b></div>
   クリックでスケジュールを確認する<br>
-  <%= link_to 'マイページへ戻る', user_path(current_user.id) %>
+  <%= link_to 'マイページへ', user_path(current_user.id) %>
   <br>
     <% @users.each do |user|%>
     <% if user.id == current_user.id %>
