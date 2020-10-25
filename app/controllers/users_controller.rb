@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, except: [:guest]
   def index
     @users = User.all
   end
@@ -17,6 +18,9 @@ class UsersController < ApplicationController
     @products = Product.where(user_id: params[:id]).includes(:issues)
     @tasks = Task.includes(issue: :product).where(products: { user_id: params[:id]}).where(start: week_start..week_end).order(start: "ASC")
   end
+  def guest
+    user = User.find(1)
+    sign_in user
+    redirect_to root_path
+  end
 end
-
-#Date.new(week_start.year, week_start.mon, week_start.day)

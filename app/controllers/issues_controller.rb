@@ -1,4 +1,5 @@
 class IssuesController < ApplicationController
+  before_action :authenticate_user!
   def new
     @issue = Issue.new
     @product = Product.find(params[:product_id])

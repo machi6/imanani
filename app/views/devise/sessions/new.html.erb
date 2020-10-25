@@ -15,4 +15,10 @@
   <div class = "sessions-item">
     未登録の方は<%=link_to 'こちら', new_user_registration_path %>から新規登録ができます。
   </div>
+  <div>
+    <b>※以下の簡易ログインでは、新規登録不要でアプリを体感できます。</b>
+  </div>
+  <div>
+    <%= link_to '簡易ログイン', users_guest_sign_in_path, method: :post%>
+  </div>
 </div>

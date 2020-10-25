@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   #before_action :get_info , only: [:create, :edit, :update, :destory]
+  before_action :authenticate_user!
 
   def new
     @task = Task.new
